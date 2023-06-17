@@ -1,0 +1,71 @@
+.f-block{
+    padding: 10px;
+    height: max-content;
+    background-color: white;
+}
+
+.f-cont-form-reg{
+    display: grid;
+    padding-top: 10px;
+}
+
+.f-log-semititu{
+    color: var(--text-dark);
+    font-size: 1.1em;
+    padding-left: 5px;
+}
+
+.f-log-input{
+    border: 0;
+    border-bottom: 2px solid var(--logo-color-light);
+    border-radius: 10px;
+    font-family: 'Lato', sans-serif;
+    width: 100%;
+    height: 2rem;
+    padding: 0.25rem 0 0.25rem 0.70rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #111;
+    background: #f9f9f9;
+    margin-bottom: 30px;
+    
+    &:focus {
+        outline: none;
+        background: var(--background-gray);
+        border-bottom: 2px solid var(--logo-color-dark);
+        color: Black;
+        font-weight: 600;
+    }
+}
+
+.f-log-boton-formi {
+    display: flex;
+    background: none;
+    border: 2px solid;
+    font: inherit;
+    border-radius: 200px;
+    line-height: 1;
+    margin: 0.5em;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding: .3em 1em .3em 1em;
+    width: 200px;
+    color: #3c0673;
+    transition: 0.25s;
+    justify-content: center;
+    justify-self: flex-end;
+    &:hover,
+    &:focus {
+      border-color: #3c0673;
+      color: #fff;
+    }
+    @media only screen and (max-width: 768px) {
+      /* padding: 0; */
+    }
+    
+  }
+  
+  .f-log-boton-formi:hover,
+  .f-log-boton-formi:focus {
+    box-shadow: inset 0 -3.25em 0 0 var(--logo-color-dark);
+  }

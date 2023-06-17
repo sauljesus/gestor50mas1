@@ -1,0 +1,140 @@
+:root{
+    --background-gray: #efefef;
+    --background-white: #fff;
+    --text-gray: #666;
+    --text-dark: #333;
+    --logo-color-dark: #4b0683;
+    --logo-color-light: #a781d6;
+    overflow-x: hidden;
+    
+}
+#root{
+  height: auto;
+}
+.fullscreen{
+  min-width: 100vw;
+  min-height: 100vh;
+  
+}
+.of-y-hidden{
+  max-height: 100vh;
+  overflow-y: hidden;
+}
+.qr{
+  display: none;
+}
+
+.body_index { 
+    height: auto;
+    width: 100vw;
+    min-height: 100vh;
+    max-width: calc(100vw - 22.7vw);
+    margin-left: 22.7vw;
+    background-color: var(--background-gray);
+}
+
+.main-container{
+  display: grid;
+  grid-template-rows: 100px calc(100% - 100px);
+}
+
+.header{
+  display: grid;
+  grid-template-columns: 70% 10% 20%;
+}
+
+.route{
+  display: grid;
+  grid-template-rows: 50% 50%;
+  padding: 0px 0px 0px 60px;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.route-text-up{
+  display: grid;
+  grid-template-columns: 12% 88%;
+  color: var(--text-gray);
+  padding-bottom: 0px;
+  display: flex;
+  align-self: end;
+  justify-self: start;
+}
+.route-icon{
+  padding-top: 2px;
+  margin-right: 7px;
+  display: flex;
+  align-self: center;
+  justify-self: start;
+}
+
+.route-text-down{
+  color: var(--text-dark);
+  display: flex;
+}
+
+.corner-icons{
+  font-size: 1.6em;
+  font-weight: 600;
+  padding-bottom: 10px;
+  display:flex;
+  align-items: center;
+  justify-self: center;
+}
+
+.route-icons{
+ margin-left: 15px;
+ margin-right: 15px;
+}
+
+.sticky{
+  position: sticky;
+  top: 0;
+}
+
+.shadow-box{
+    box-shadow: rgb(85, 85, 85) 0px 10px 15px -5px;
+}
+
+@media only screen and (max-width: 768px){
+  .body_index { 
+    margin-left: 1vw;
+    max-width: 98vw;
+    width: 98vw;
+    height: auto;
+  }
+  .header{
+    grid-template-columns: 60% 15% 25%;
+  }
+  .route{
+    margin-left: 15px;
+  }
+}
+
+
+@media only screen and (max-width: 450px){
+
+  .body_index { 
+    width: 100vw;
+    margin: 0;
+    max-width: 100vw;
+    height: auto;
+  }
+  .route-icons{
+    margin-left: 0px;
+    margin-right: 0px;
+   }
+  .header{
+    grid-template-columns: 55% 15% 30%;
+  }
+  .route{
+    padding-left: 15px;
+  }
+  .route-icons{
+    margin-left: 5px;
+    margin-right: 5px;
+   }
+  .content{
+    min-height: calc(100vh - 140px);
+  }
+}

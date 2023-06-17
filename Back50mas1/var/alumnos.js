@@ -1,0 +1,31 @@
+id, nombre, apellidoPaterno, apellidoMaterno, curp, rfc, estadoCivil, calle, numero, colonia, municipio, estado, CP, telefono, celular, email, password,  edad, nivelAcademico, sexo, hijos, nivelAHijos, trabaja, empresa, direccionEmpresa, registroMedico, tipoUsuario, status
+
+{
+    ""nombre: ,
+    ""apellidoPaterno: , 
+    ""apellidoMaterno: ,
+    ""curp:,
+    ""rfc:,
+    ""estadoCivil:,
+    ""calle:,
+    ""numero:,
+    ""colonia:,
+    ""municipio:,
+    ""estado:,
+    ""CP:,
+    ""telefono:,
+    ""celular:,
+    ""email:,
+    ""password: ,
+    ""edad:,
+    ""nivelAcademico:,
+    ""sexo:,
+    ""hijos:,
+    ""nivelAHijos:,
+    ""trabaja:,
+    ""empresa:,
+    ""direccionEmpresa:,
+    ""registroMedico:,
+    ""status:'Activo', 
+    ""tipoUsuario: 
+}
