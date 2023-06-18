@@ -130,7 +130,7 @@ function Consulta({page}) {
                             <div className='s-box-name'>
                                 <div className='s-box-foto'>
                                     <img
-                                        src={IMG}
+                                        src={"https://ui-avatars.com/api/?name="+alumno.nombre+"+"+alumno.apellidoPaterno +"&background=8844bd&color=fafbfd&bold=true"}
                                         alt="estadistica1"
                                         className='s-img'
                                     />

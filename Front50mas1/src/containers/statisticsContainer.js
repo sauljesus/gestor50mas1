@@ -1,5 +1,5 @@
 import React from 'react';
-import Statisticsalum from '../pages/alum/statistics';
+import Statistics from '../pages/statistics';
 import { useState } from 'react';
 
 const StatisticsContainer = () =>{
@@ -7,7 +7,7 @@ const StatisticsContainer = () =>{
 
 
     return(
-        <Statisticsalum page = { page }/>
+        <Statistics page = { page }/>
     )
 };
 

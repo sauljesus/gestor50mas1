@@ -11,6 +11,13 @@ const Talleres = db.define('talleres',{
             len: [1, 11]
         }
     },
+    correo:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            isEmail: true
+        }
+    },
     nombre:{
         type: DataTypes.STRING,
         allowNull: false,
@@ -24,7 +31,7 @@ const Talleres = db.define('talleres',{
         allowNull: false,
         validate:{
             notEmpty: true,
-            len: [3, 50]
+            len: [3, 200]
         }
     },
     periodo:{

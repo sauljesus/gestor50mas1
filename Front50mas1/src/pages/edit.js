@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Edit(page,page2) {
+function Edit({ page,page2}) {
     const [alumno, setAlumno] = useState([]);
     const { boleta } = useParams();
     const [showNotification, setShowNotification] = useState(false);

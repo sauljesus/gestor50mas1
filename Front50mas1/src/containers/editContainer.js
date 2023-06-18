@@ -8,7 +8,7 @@ const EditContainer = (boleta) =>{
 
 
     return(
-        <Edit page = { page } page2 = { page2 } boleta = { boleta } />
+        <Edit page = { page } page2 = { page2 } />
     )
 };
 
