@@ -24,7 +24,7 @@ const Talleres = db.define('talleres',{
         allowNull: false,
         validate:{
             notEmpty: true,
-            len: [3, 50]
+            len: [3, 200]
         }
     },
     periodo:{
