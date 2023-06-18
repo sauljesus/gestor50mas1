@@ -1,16 +1,16 @@
-.notification{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width:  30vh;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    background-color: #ffffff;
-    border-radius: 50px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    margin-bottom: 20px;
-    background-color: purple;
-    color: white;
-  }
+.notification {
+  position: flex;
+  top: 50px;
+  width: 400px;
+  z-index: 1;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: purple;
+  color: white;
+}
+
+.button-alert {
+  padding-right: 20px;
+}
