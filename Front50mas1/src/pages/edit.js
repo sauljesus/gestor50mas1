@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Edit({ page,page2}) {
+function Edit({ page }) {
     const [alumno, setAlumno] = useState([]);
     const { boleta } = useParams();
     const [showNotification, setShowNotification] = useState(false);
@@ -62,7 +62,7 @@ function Edit({ page,page2}) {
             <Navbar page={page} />
             <div className='body_index'>
                 <div className="main-container">
-                    <Header page={page} page2={page2} />
+                    <Header page={page} page2={"Edición"} />
                     <div className="p-content">
                         <div className="p-main">
                       

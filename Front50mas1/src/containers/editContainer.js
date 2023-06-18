@@ -3,12 +3,11 @@ import Edit from '../pages/edit';
 import { useState } from 'react';
 
 const EditContainer = (boleta) =>{
-    const page2 = "Perfil";
-    const page = "Dashboard";
+    const page = "Consultas";
 
 
     return(
-        <Edit page = { page } page2 = { page2 } />
+        <Edit page = { page } />
     )
 };
 

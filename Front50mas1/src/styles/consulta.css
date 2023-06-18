@@ -37,7 +37,7 @@
     height: 70px;
     width: 100%;
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr 1fr;
+    grid-template-columns: 3fr 1fr 2fr 1fr;
     align-items: center;
     border: 2px solid var(--background-gray);
     background-color: var(--background-white);
@@ -122,6 +122,19 @@
     bottom: 15px;
     /* cursor: pointer; */
     border: 1px solid var(--background-gray);
+}
+
+.c-box-head{
+    background-color: var(--background-white);
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    border-radius: 15px 15px 0px 0px;
+    border: 1px solid var(--background-gray);
+    max-height: 80px;
+}
+.c-search-box{
+    background-color: red;
 }
 
 
