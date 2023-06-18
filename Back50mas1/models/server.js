@@ -7,6 +7,7 @@ const CertRoute = require('../routes/CertificadoRoute');
 const TallerRoute = require('../routes/TalleresRoute');
 const EstadisticasRoute = require('../routes/estadisticasRoute'); //
 const AuthRoute = require('../routes/AuthRoute');
+const TalleresAlumnoRoute = require('../routes/TalleresAlumnoRoute');
 const http  = require('http');
 const db = require('../config/Database');
 class Server {
@@ -46,6 +47,7 @@ class Server {
         this.app.use(CertRoute);
         this.app.use(TallerRoute);
         this.app.use(EstadisticasRoute);
+        this.app.use(TalleresAlumnoRoute);
     }
     listen(){
         this.app.listen(this.port,() =>{

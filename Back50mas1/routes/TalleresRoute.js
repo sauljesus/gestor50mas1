@@ -6,8 +6,12 @@ const talleresController = require('../controller/talleres');
 
 router.get('/talleres', talleresController.getTalleres);
 
+router.get('/misTalleres/:correo', talleresController.getTalleresByCorreo);
+
 router.put('/tallercreate', talleresController.createtaller);
 
 router.put('/inscribirtaller', talleresController.createtaller);
+
+
 
 module.exports = router;

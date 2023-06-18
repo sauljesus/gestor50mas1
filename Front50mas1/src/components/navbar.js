@@ -45,7 +45,7 @@ function Navbar({visible, show, page}) {
                             <div className='icones shadow-box'> <AiFillHome/></div> 
                             <span>Inicio</span>
                         </Link>
-                        <Link to="/consultas" className={page==="Consulta" ? "nav-link-selected" : "nav-link" }>
+                        <Link to="/consultas" className={page==="Consultas" ? "nav-link-selected" : "nav-link" }>
                             <div className='icones shadow-box'> <BiSearchAlt/></div> 
                             <span>Consulta</span>
                         </Link>
@@ -53,11 +53,11 @@ function Navbar({visible, show, page}) {
                             <div className='icones shadow-box'> <GoGraph/></div> 
                             <span>Estadísiticas</span> 
                         </Link>
-                        <NavLink to="/ingreso" className={page==="Ingreos Manual" ? "nav-link-selected" : "nav-link" }>                            
+                        <NavLink to="/ingreso" className={page==="Ingreso Manual" ? "nav-link-selected" : "nav-link" }>                            
                             <div className='icones shadow-box'> <BiEdit/></div> 
                             <span>Ingreso manual</span> 
                         </NavLink>
-                        <Link to="/masivecharge" className={page==="Excel" ? "nav-link-selected" : "nav-link" }>                            
+                        <Link to="/masivecharge" className={page==="Cargar Información" ? "nav-link-selected" : "nav-link" }>                            
                             <div className='icones shadow-box'> <SiMicrosoftexcel/></div> 
                             <span>Cargar información</span> 
                         </Link>

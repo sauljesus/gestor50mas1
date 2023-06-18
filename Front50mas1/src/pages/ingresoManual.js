@@ -197,7 +197,7 @@ const IngresoManual = ({ page }) => {
               Registro realizado correctamente
             </div>
           )}
-            <Navbar page={page} />
+            <Navbar page={page}/>
             <div className='s-body_index'>
                 <div className="main-container">
                     <Header page={page} page2={textPage} />

@@ -24,7 +24,6 @@ function Solicitudes({ page }) {
   const fetchCertificados = () => {
     axios.get('http://localhost:5000/certificados')
       .then(response => {
-        console.log(response.data);
         setCertificados(response.data);
       })
       .catch(error => {

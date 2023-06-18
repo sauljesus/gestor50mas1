@@ -13,7 +13,7 @@ const Talleres = db.define('talleres',{
     },
     correo:{
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         validate:{
             isEmail: true
         }

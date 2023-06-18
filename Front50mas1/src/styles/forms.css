@@ -15,6 +15,10 @@
     padding-left: 5px;
 }
 
+.f-font-bold{
+  font-weight: bold;
+}
+
 .f-log-input{
     border: 0;
     border-bottom: 2px solid var(--logo-color-light);

@@ -3,11 +3,12 @@ import Grupo from '../pages/grupo';
 import { useState } from 'react';
 
 const GrupoContainer = () =>{
-    const page = "Mis grupos";
+    const page2 = "Mis grupos";
+    const page = "Grupo";
 
 
     return(
-        <Grupo page = { page } />
+        <Grupo page = { page } page2 = { page2 } />
     )
 };
 
