@@ -43,7 +43,7 @@ CREATE TABLE `alumno` (
   `CP` int(6) NOT NULL,
   `telefono` int(13) NOT NULL,
   `celular` int(13) NOT NULL,
-  `correo` varchar(30) NOT NULL,
+  `correo` varchar(100) NOT NULL,
   `password` varchar(150) NOT NULL,
   `edad` int(3) NOT NULL,
   `nivelAcademico` varchar(30) NOT NULL,
