@@ -11,6 +11,14 @@ const Talleres = db.define('talleres',{
             len: [1, 11]
         }
     },
+    correo:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            notEmpty: true,
+            isEmail: true
+        }
+    },
     nombre:{
         type: DataTypes.STRING,
         allowNull: false,
