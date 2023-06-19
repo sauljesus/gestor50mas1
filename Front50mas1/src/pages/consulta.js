@@ -9,18 +9,15 @@ import IMG from "../images/descarga.png";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link } from 'react-router-dom';
-import Pagination from 'react-bootstrap/Pagination';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { BiSearchAlt } from 'react-icons/bi';
+import CloseButton from 'react-bootstrap/CloseButton';
 
 function Consulta({ page }) {
   const [alumnos, setAlumnos] = useState([]);
   const [profesores, setProfesores] = useState([]);
   const [talleres, setTalleres] = useState([]);
-  const [bolid, setBoleta] = useState([]);
-  const [searchText, setSearchText] = useState('');
-  const [selectedAlumno, setSelectedAlumno] = useState(null);
-  const [navVisible, showNavbar] = useState(true);
-  const page2 = "Perfil";
-  const pagee = "Dashboard";
   const [showAlumno, setShowAlumno] = useState(true);
   const [showTaller, setShowTaller] = useState(false);
   const [showProfesor, setShowProfesor] = useState(false);
@@ -54,8 +51,8 @@ function Consulta({ page }) {
   const fetchAlumnos = () => {
     axios.get('http://localhost:5000/alumnos')
       .then(response => {
-        console.log(response.data);
         setAlumnos(response.data);
+        setDataAlumno(response.data);
       })
       .catch(error => {
         console.error(error);
@@ -64,9 +61,8 @@ function Consulta({ page }) {
 
   const fetchTalleres = () => {
     axios.get('http://localhost:5000/talleres')
-      .then(responset => {
-        console.log(responset.data);
-        setTalleres(responset.data);
+      .then(response => {
+        setTalleres(response.data);
       })
       .catch(error => {
         console.error(error);
@@ -76,7 +72,6 @@ function Consulta({ page }) {
   const fetchProfesores = () => {
     axios.get('http://localhost:5000/usuarios')
       .then(responsep => {
-        console.log(responsep.data);
         setProfesores(responsep.data);
       })
       .catch(error => {
@@ -84,33 +79,36 @@ function Consulta({ page }) {
       });
   };
 
+  ///////////////////////ALUMNO
+  const [sAlumno, setSAlumno] = useState("");
+  const [showClear, setShowClear] = useState(false);
+  const [dataAlumno, setDataAlumno] = useState([]);
+  const handleSearchAlumno = (e) => {
+    setSAlumno(e.target.value);
+  }
   const searchAlumno = () => {
-    axios.get(`/alumnos/${searchText}`)
-      .then(response => {
-        setSelectedAlumno(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-        setSelectedAlumno(null);
-      });
-  };
-
-  const [menuVisible, setMenuVisible] = useState(false);
-
-  // Función para mostrar u ocultar el menú de edit emergente
-  const toggleMenu = (alumno) => {
-    console.log('Elemento seleccionado:', alumno.boleta);
-    setMenuVisible(!menuVisible);
-    setBoleta(alumno)
-    console.log(bolid);
-  };
+    let cont = [];
+    alumnos.forEach(alumno => {
+      if (alumno.boleta.toString().includes(sAlumno))
+        cont.push(alumno);
+    });
+    setDataAlumno(cont);
+    setShowClear(true);
+  }
+  const clearSearch = () => {
+    setDataAlumno(alumnos);
+    setSAlumno("");
+    setShowClear(false);
+  }
+  const [aPage, setAPage] = useState(1);
+  const [aPageSize, setAPageSize] = useState();
 
   return (
     <>
       <Navbar page={page} />
       <div className='s-body_index'>
         <div className="main-container">
-          <Header page={page} page2={page} />
+          <Header page={page} page2={textPage} />
           <div className="s-content">
             <DropdownButton id="dropdown-basic-button" title='Seleccionar el tipo de Consulta' className='ing-drop'>
               <Dropdown.Item onClick={() => { setShow("alumno"); setTextPage("Registro de alumno") }}>Alumno</Dropdown.Item>
@@ -120,10 +118,20 @@ function Consulta({ page }) {
 
             <div className={showAlumno ? "ing-content-form" : "ing-display-n"}>
               <div className='c-box-head'>
-                <div className='s-text-head'>Consulta de Usuarios</div>
-                <div className='c-search-box'></div>
+                <div className='c-search-box'>
+                  <InputGroup className="mb-3 no-float">
+                    <Form.Control
+                      placeholder="Boleta"
+                      onChange={(e) => handleSearchAlumno(e)}
+                      value={sAlumno}
+                    />
+                    <InputGroup.Text className={showClear ? 'c-search-btn' : 'qr'} onClick={() => clearSearch()}><CloseButton /></InputGroup.Text>
+                    <InputGroup.Text className='c-search-btn' onClick={() => searchAlumno()}><BiSearchAlt /></InputGroup.Text>
+                  </InputGroup>
+                  <div className='c-text-head'>Consulta de Usuarios</div>
+                </div>
               </div>
-              {alumnos.map(alumno => (
+              {dataAlumno.map(alumno => (
                 <div className='s-box-list' key={alumno.boleta}>
                   <div className="s-box-element">
                     <div className='s-box-name'>
@@ -211,9 +219,9 @@ function Consulta({ page }) {
 
 
           </div>
-          <div className='s-float-icon shadow-box'>
+          {/* <div className='s-float-icon shadow-box'>
             <BsGearFill />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

@@ -29,6 +29,13 @@
     font-weight: 600;
     color: var(--text-dark);
 }
+.c-text-head{
+    font-size: 1.6em;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: start;
+    padding-left: 30px;
+}
 
 .s-box-list{
     display: block;
@@ -127,14 +134,28 @@
 .c-box-head{
     background-color: var(--background-white);
     padding: 15px;
-    display: grid;
-    grid-template-columns: 50% 50%;
     border-radius: 15px 15px 0px 0px;
     border: 1px solid var(--background-gray);
     max-height: 80px;
 }
 .c-search-box{
-    background-color: red;
+    width: 100%;
+    height: 90%;
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+.c-search-btn{
+    cursor: pointer;
+}
+.no-float {
+    float: none;
+    z-index: 0;
+    width: 100%;
+}
+.no-float > * {
+    float: none;
+    z-index: 0;
+
 }
 
 
@@ -182,6 +203,9 @@
         font-weight: 600;
     }
     .s-text-head{
+        font-size: 1.4em;
+    }
+    .c-text-head{
         font-size: 1.4em;
     }
     .s-content{
