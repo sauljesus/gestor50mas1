@@ -48,28 +48,83 @@ const uploadFile = (req, res) => {
         const worksheet3 = workbook.Sheets[workbook.SheetNames[2]];
         const usuarios = xlsx.utils.sheet_to_json(worksheet3);
     
-    
-    
-        for (let j = 0; j < alumnos.length; j++){
-          jsonDatasave = alumnos[j];
+        for (let i = 0; i < alumnos.length; i++){
+          jsonDatasave = alumnos[i];
           const hashedPassword = await bcrypt.hash(jsonDatasave.password, 10);
           console.log(hashedPassword);
-          jsonDatasave.password = hashedPassword;
-          masiveCharge();
+          try{
+            await Alumno.create({
+                boleta: await generarBoleta(),
+                nombre: jsonDatasave.nombre,
+                apellidoPaterno: jsonDatasave.apellidoPaterno, 
+                apellidoMaterno: jsonDatasave.apellidoMaterno,
+                curp: jsonDatasave.curp,
+                rfc: jsonDatasave.rfc,
+                estadoCivil: jsonDatasave.estadoCivil,
+                calle: jsonDatasave.calle,
+                numero: jsonDatasave.numero,
+                colonia: jsonDatasave.colonia,
+                municipio: jsonDatasave.municipio,
+                estado:jsonDatasave.estado,
+                CP: jsonDatasave.CP,
+                telefono:jsonDatasave.telefono,
+                celular: jsonDatasave.celular,
+                correo:  jsonDatasave.correo,
+                password: hashedPassword,
+                edad: jsonDatasave.edad,
+                nivelAcademico: jsonDatasave.nivelAcademico,
+                sexo:jsonDatasave.sexo,
+                hijos: jsonDatasave.hijos,
+                nivelAHijos: jsonDatasave.nivelAHijos,
+                trabaja: jsonDatasave.trabaja,
+                empresa: jsonDatasave.empresa,
+                direccionEmpresa: jsonDatasave.direccionEmpresa,
+                registroMedico: jsonDatasave.registroMedico,
+                tipoUsuario: jsonDatasave.tipoUsuario,
+                status: jsonDatasave.status,
+            });
+          } catch (error) {
+            console.error(error);
+            //return res.status(500).json({ error: 'Ocurrio un error al realizar la carga' });
+          }
         }
 
         for (let c = 0; c < cursos.length; c++){
           console.log(cursos[c]);
           jsonDatasavecursos = cursos[c];
-          masiveChargecursos();
+          try{
+            await Course.create({
+              codigo_taller: jsonDatasavecursos.codigo_taller,
+              nombre: jsonDatasavecursos.nombre,
+              descripcion: jsonDatasavecursos.descripcion, 
+              periodo: jsonDatasavecursos.periodo,
+            });
+          } catch (error) {
+            console.error(error);
+            //return res.status(500).json({ error: 'Ocurrio un error al realizar la carga' });
+          }
         }
 
         for (let u = 0; u < usuarios.length; u++){
           console.log(usuarios[u]);
           jsonDatasaveu = usuarios[u];
           const hashedPasswordu = await bcrypt.hash(jsonDatasaveu.password, 10);
-          jsonDatasaveu.password = hashedPasswordu;
-          mschargeusers();
+          try{
+            await Users.create({
+              nombre: jsonDatasaveu.nombre,
+              apellidoPaterno : jsonDatasaveu.apellidoPaterno,
+              apellidoMaterno: jsonDatasaveu.apellidoMaterno,
+              correo: jsonDatasaveu.correo,
+              password:	 hashedPasswordu,
+              tipoUsuario:	jsonDatasaveu.tipoUsuario,
+              status:	jsonDatasaveu.status,
+              inicioLaboral:	jsonDatasaveu.inicioLaboral,
+        
+            });
+          } catch (error) {
+            console.error(error);
+            //return res.status(500).json({ error: 'Ocurrio un error al realizar la carga' });
+          }
         }
 
       return res.status(200).json({ message: 'Carga de Excel completada exitosamente' });
@@ -78,9 +133,6 @@ const uploadFile = (req, res) => {
       return res.status(500).json({ error: 'Error processing the uploaded file' });
     }
   });
-
- 
-
 
 };
 
