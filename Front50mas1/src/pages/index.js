@@ -15,7 +15,7 @@ const Index = ({scrollDown}) => {
     const [correo, setCorreo] = useState('');
     const [password, setPassword] = useState('');
     const [showNotification, setShowNotification] = useState(false);
-    const [message, setMessage] = useState([]);
+    const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
 
@@ -80,7 +80,7 @@ const Index = ({scrollDown}) => {
         <div>
             {showNotification && (
                 <div className="notification" style={{color:"#ffffff"}}>
-                {message.message}
+                {message}
                 </div>
             )}
         <div className='gridtop'>
@@ -107,7 +107,7 @@ const Index = ({scrollDown}) => {
                     <div className='log-header'>
                         <img className='log-imacosi' src={IMG} alt="logo fundacion 50 + 1" />
                     </div>
-                    <form className='log-cont-form-regi' onSubmit={selUsuario2}  >
+                    <form className='log-cont-form-regi' onSubmit={selUsuario}  >
                         <h1 className='log-semititui'>Email</h1>
                         <input className='log-input' type="text" name="txtEmail" placeholder="correo" value={correo} onChange={(e) => setCorreo(e.target.value)}/>
                         <h1 className='log-semititui'>Contraseña</h1>

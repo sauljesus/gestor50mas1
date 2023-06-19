@@ -16,6 +16,7 @@ router.post('/loginUser',[
     validarCampos
 ], LoginUser);
 
+
 router.delete('/logout', LogOut); 
 
 module.exports = router;

@@ -7,7 +7,8 @@ const generarBoleta  = async() =>{
     var mes = today.getMonth() + 1;
     var me = mes < 10 ? '0' + mes : mes;
     const regsitro  =await db.query("SELECT COUNT(*) as total FROM alumno", { type: QueryTypes.SELECT });
-    var boleta = regsitro[0].total.toString().padStart(4, '0'); 
+    const conteo = regsitro[0].total+1;
+    var boleta = conteo.toString().padStart(4, '0'); 
     //res.status(200).json({msg:});
     //console.log(regsitro[0].total);
     //console.log(regsitro[0].total.toString().padStart(4, '0'))

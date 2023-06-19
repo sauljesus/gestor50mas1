@@ -1,7 +1,7 @@
 import React from 'react';
 import {AiFillHome} from 'react-icons/ai';
-import {FaUserCircle} from 'react-icons/fa';
-import {BsGearFill, BsFillBellFill} from 'react-icons/bs';
+import {FaUserCircle, FaSignOutAlt} from 'react-icons/fa';
+import {BsGearFill, BsFillBellFill, BsBorder} from 'react-icons/bs';
 import '../styles/navbar.css';
 
 function Header({page, page2, alumno}) {
@@ -26,7 +26,7 @@ function Header({page, page2, alumno}) {
                     <BsGearFill/>
                 </div>
                 <div className="route-icons">
-                    <BsFillBellFill/>
+                    <button style={{border:'none'}}><FaSignOutAlt/></button>
                 </div>
             </div>
         </div>
