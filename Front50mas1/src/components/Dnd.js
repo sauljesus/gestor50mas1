@@ -38,21 +38,28 @@ const DndropImage = () => {
   const handleUpload = () => {
     const formData = new FormData();
     formData.append('file', selectedFile);
-    setMessage({ message: "Subiendo información..." });
-    setShowNotification(true);
-    axios.post('http://localhost:5000/upload', formData)
-      .then(response => {
-        // console.log(response.data);
-        setMessage(response.data);
-        setShowNotification(true);
-        // Ocultar la notificación después de 5 segundos
-        setTimeout(() => {
-          setShowNotification(false);
-        }, 5000);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    
+    if(!selectedFile){
+      setMessage({ message: "No se selecciono ningun archivo" });
+      setShowNotification(true);
+    }else{
+      setMessage({ message: "Subiendo información..." });
+      setShowNotification(true);
+      axios.post('http://localhost:5000/upload', formData)
+        .then(response => {
+          // console.log(response.data);
+          setMessage(response.data);
+          setShowNotification(true);
+          // Ocultar la notificación después de 5 segundos
+          setTimeout(() => {
+            setShowNotification(false);
+          }, 5000);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+   
   };
 
   const Evsource = { EV }
