@@ -125,9 +125,6 @@ const masiveCharge = async(req ,res) => {
 
 }
 
-
-
-
 const masiveChargecursos = async(req ,res) => {
   try{
     await Course.create({
@@ -143,7 +140,6 @@ const masiveChargecursos = async(req ,res) => {
   }
 
 }
-
 
 const mschargeusers = async (req ,res) => {
   try{

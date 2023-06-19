@@ -218,6 +218,42 @@ const deleteAlumno = async(req ,res) => {
        res.status(400).json({msg: error.message});
    }
 }
+
+
+const getLog = async (req, res) => {
+
+    const { correo, password } = req.body;
+
+    const user = await Alumno.findOne({
+        where: {
+            correo: correo
+        }
+    });
+    if (!user) return res.status(404).json({ msg: "Usuario no encontrado" });
+    // Comparar la contraseña encriptada almacenada con la proporcionada en el inicio de sesión
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    console.log(user.password)
+    console.log(isPasswordValid)
+    if (!isPasswordValid) {
+        res.status(401).json({ error: 'Contraseña incorrecta' });
+        return;
+    }
+
+    try {
+        // Generar un token JWT
+        const token = jwt.sign(
+            { correo: user.correo },
+            'secreto_del_token',
+            { expiresIn: '1h' }
+        );
+
+        res.status(200).json({ token });
+    } catch (error) {
+        res.status(400).json({ msg: error.message });
+    }
+}
+
 module.exports = {
     getTest,
     getAlumnos,
@@ -227,5 +263,6 @@ module.exports = {
     deleteAlumno,
     getAlumno,
     getAlumnoByBoleta,
-    updateAlumnoedit
+    updateAlumnoedit,
+    getLog,
 };

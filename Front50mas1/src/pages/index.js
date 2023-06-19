@@ -17,6 +17,33 @@ const Index = ({scrollDown}) => {
     const [showNotification, setShowNotification] = useState(false);
     const [message, setMessage] = useState([]);
     const navigate = useNavigate();
+
+
+    const selUsuario2= async (e) =>{
+        e.preventDefault();
+        const user = {"correo":correo,"password":password};   
+        //console.log(user);  
+        
+        //local
+        axios.post(`http://localhost:5000/login`,user).then((res)=>{
+    
+        //serve
+        //axios.post(`http://20.55.91.62:5000/login`,user).then((res)=>{
+            const data = {
+                user: user.correo,
+                token: res.data.jwt,
+                boleta:res.data.boleta,
+              };
+            navigate('/alum/home',{state: data});
+            // window.localStorage.setItem('token',res.data.jwt)
+            // window.location.replace(`/user/${user.correo}`);
+        }).catch((err)=>{
+          console.log(err.response.data.msg)
+          alert(`Error: ${err.response.data.msg}`)
+        })
+    
+      }
+
     const selUsuario= async (e) =>{
         e.preventDefault();
         const user = {"correo":`${e.target.elements.txtEmail.value}`,"password":`${e.target.elements.txtPass.value}`};   
@@ -44,6 +71,10 @@ const Index = ({scrollDown}) => {
             window.location.replace(`/`);
         })
     }
+
+
+
+
   
     return (
         <div>
@@ -76,7 +107,7 @@ const Index = ({scrollDown}) => {
                     <div className='log-header'>
                         <img className='log-imacosi' src={IMG} alt="logo fundacion 50 + 1" />
                     </div>
-                    <form className='log-cont-form-regi' onSubmit={selUsuario}  >
+                    <form className='log-cont-form-regi' onSubmit={selUsuario2}  >
                         <h1 className='log-semititui'>Email</h1>
                         <input className='log-input' type="text" name="txtEmail" placeholder="correo" value={correo} onChange={(e) => setCorreo(e.target.value)}/>
                         <h1 className='log-semititui'>Contraseña</h1>
