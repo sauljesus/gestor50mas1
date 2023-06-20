@@ -15,7 +15,8 @@ const LoginAlumno = async (req, res) =>{
     if(!alumno.status) return res.status(404).json({msg: "Usuario no encontrado"});
     try{
         const {nombre, apellidoPaterno, correo} = alumno;
-        const tipoUsuario = 'alumno'
+        const bol = alumno.boleta;
+        console.log("esta es la boleta "+ bol);
         //const isPasswordValid =  ;
         // console.log(alumno.password)
         // console.log(isPasswordValid)
@@ -25,7 +26,7 @@ const LoginAlumno = async (req, res) =>{
             // const tipoUsuario = user
             const jwt = await generarJWTAlumno(nombre,apellidoPaterno,correo)
             //res.status(200).json({msg: "login Exitoso"});
-            return res.send({jwt, correo,tipoUsuario});
+            return res.send({jwt, correo,bol});
         } else{
             res.status(400).json({msg: "Contraseña incorrecta"});
         }
@@ -60,11 +61,15 @@ const LoginUser = async (req, res) =>{
     }
     
 }
+const validarSesion = async(req,res)=>{
+    return res.send({msg: 'pass'});
+}
 const LogOut = (req, res) =>{
     console.log("Cerraste sesion");
 }
 module.exports = {
     LoginAlumno,
     LoginUser,
+    validarSesion,
     LogOut
 };

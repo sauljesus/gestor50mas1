@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import '../styles/Index.css';
 import { Fade } from "react-awesome-reveal";
@@ -18,6 +18,14 @@ const Index = ({scrollDown}) => {
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
+    useEffect(()=>{
+        const jwt = window.localStorage.getItem('token');
+        console.log(jwt);
+        if (jwt != null){
+            alert("sesion abierta")
+        }
+    })
+
 
     const selUsuario2= async (e) =>{
         e.preventDefault();
@@ -34,9 +42,9 @@ const Index = ({scrollDown}) => {
                 token: res.data.jwt,
                 boleta:res.data.boleta,
               };
-            navigate('/alum/home',{state: data});
-            // window.localStorage.setItem('token',res.data.jwt)
-            // window.location.replace(`/user/${user.correo}`);
+              console.log(data);
+            //navigate('/alum/home',{state: data});
+            window.localStorage.setItem('token',res.data.jwt)
         }).catch((err)=>{
           console.log(err.response.data.msg)
           alert(`Error: ${err.response.data.msg}`)
@@ -54,6 +62,7 @@ const Index = ({scrollDown}) => {
             //history.push('/boardappI', {user: user.correo, token: res.data.jwt, tipo: "profesor", room:res.data.id});
             window.localStorage.setItem('token',res.data.jwt);
             window.localStorage.setItem('correo',user.correo);
+            window.localStorage.setItem('boleta',res.data.bol)
             const ms = "Login Exitoso";
             setMessage(ms);
             setShowNotification(true);

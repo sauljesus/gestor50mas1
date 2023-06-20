@@ -1,5 +1,6 @@
 //const { response , request } = require('express');
 const jose = require('jose');
+const Alumno = require ('../models/alumnoModel');
  
    const validartoken = async (req,res,next)=>{
    const accessToken = req.headers['authorization'] 
@@ -8,15 +9,17 @@ const jose = require('jose');
     try {
         const encoder = new TextEncoder();
         const jwtData = await jose.jwtVerify(accessToken, encoder.encode(process.env.JWT_PRIVATE_KEY));
-        console.log(jwtData);
-        if(!(jwtData.payload.correo==req.params.correo)) {
+        const alu =  await Alumno.findOne({ where: { correo: jwtData.payload.correo } }); 
+        console.log(alu.correo);
+        console.log(jwtData.payload.correo);
+        if(!(jwtData.payload.correo==alu.correo)) {
             res.status(401).json({msg:'Acceso denegado'});
         }else{
             next();
         }
     }catch(err){
         console.log(err.code);
-        res.status(401).json({msg:'Hubo un error',code:err.code});
+        res.status(401).json({msg:'Hubo un errorasa',code:err.code});
     }
     
 }

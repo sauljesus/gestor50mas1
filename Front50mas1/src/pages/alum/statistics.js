@@ -148,6 +148,10 @@ const Statisticsalum = ({ page }) => {
 
     useEffect(() => {
         fetchData();
+        const jwt =     window.localStorage.getItem('token');
+        const correo =  window.localStorage.getItem('correo');
+        const boleta =  window.localStorage.getItem('boleta');
+        console.log(jwt);
     }, []);
 
     const fetchData = () => {
