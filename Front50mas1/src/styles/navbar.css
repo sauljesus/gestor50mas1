@@ -32,7 +32,8 @@ nav{
 	flex-direction:column;
 	justify-content: space-between;
 	width:23%;
-	min-height: 100vh;
+	height: 100vh;
+	overflow-y: auto;
     /* min-width: 265px; */
 	background-color: #e6e6e6;
 	padding:.8rem 1rem 1rem 1rem;

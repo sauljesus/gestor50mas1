@@ -3,6 +3,8 @@ import IndexContainer from '../containers/indexContainer';
 import HomeContainer from '../containers/homeContainer';
 import ProfileContainer from '../containers/profileContainer';
 import EditContainer from '../containers/editContainer';
+import EditTallerContainer from '../containers/editTallerContainer';
+import EditProfesorContainer from '../containers/editProfesorContainer';
 import SolicitudesContainer from '../containers/solicitudesContainer';
 import StatisticsContainer from '../containers/statisticsContainer';
 import LoginContainer from '../containers/loginContainer';
@@ -19,6 +21,7 @@ import UserFormContainer from '../containers/UserFormContainer';
 //alumnos
 import StatisticsContaineralum from '../containers/statisticsContaineralum';
 import SingupContaineralum from '../containers/singupContaineralum';
+import StudentGroupsContainer from '../containers/studentGroupsContainer';
 
 
 function App() {
@@ -29,6 +32,8 @@ function App() {
           <Route exact path="/home" element={<HomeContainer />}/>
           <Route exact path="/profile" element={<ProfileContainer />}/>
           <Route exact path="/edit/:boleta" element={<EditContainer />}/>
+          <Route exact path="/edit-taller/:taller" element={<EditTallerContainer />}/>
+          <Route exact path="/edit-profesor/:correo" element={<EditProfesorContainer />}/>
           <Route exact path="/consultas" element={<ConsultasContainer />}/>
           <Route exact path="/solicitudes" element={<SolicitudesContainer />}/>
           <Route exact path="/estadisticas" element={<StatisticsContainer />}/>
@@ -44,6 +49,7 @@ function App() {
           {/* alumnos */}
           <Route exact path="/alum/home" element={<StatisticsContaineralum />}/>
           <Route exact path="/alum/inscribir" element={<SingupContaineralum />}/>
+          <Route exact path="/alum/mis-grupos" element={<StudentGroupsContainer/>}/>
         </Routes>
       </Router>
   );

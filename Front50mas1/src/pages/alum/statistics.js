@@ -7,9 +7,38 @@ import LinesChart from '../../components/LineChart';
 import Pies from '../../components/PiesChart';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+
+import { useParams } from 'react-router-dom';
 
 
-const Statisticsalum = ({ page }) => {
+const Statisticsalum = ({ page}) => {
+
+
+  //WINDOW----------------------------------------------------------
+  const [user, setUser] = useState();
+  const [nombre, setNombre] = useState();
+  const [apellidoPaterno, setApellidop] = useState();
+  const [correo, setCorreo] = useState();
+  const [token, setToken] = useState();
+  const [promedioa, setPromedio] = useState();
+  const location = useLocation();
+  const { boleta } = useParams();
+  const [datos, setDatos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { state } = location;
+
+
+    useEffect(
+        () => {
+        console.log(boleta);
+        }, [location]
+        
+
+      );
+    
+
+
     const [calificaciones, setCalificaciones] = useState([]);
     var opcioneEstadisticaCalificaciones = {
         responsive: true,
@@ -145,17 +174,13 @@ const Statisticsalum = ({ page }) => {
         }
     };
 
-
     useEffect(() => {
-        fetchData();
-        const jwt =     window.localStorage.getItem('token');
-        const correo =  window.localStorage.getItem('correo');
-        const boleta =  window.localStorage.getItem('boleta');
-        console.log(jwt);
+            fetchData();
     }, []);
 
     const fetchData = () => {
-        axios.get(`http://localhost:5000/estadistica1`)
+
+        axios.get(`http://localhost:5000/estadistica6/`+boleta)
             .then(response => {
                 let data = response.data;
                 let cantPromedio = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -163,6 +188,18 @@ const Statisticsalum = ({ page }) => {
                     cantPromedio[data[i].calificacion] = data[i].total;
                 }
                 setCalificaciones(cantPromedio);
+            })
+            .catch(error => {
+                console.error(error);
+            }
+            );
+
+            axios.get(`http://localhost:5000/estadistica7/`+boleta)
+            .then(response => {
+                let data = response.data;
+                let promediod =data[0].promedio_calificaciones;
+                setPromedio(promediod);
+
             })
             .catch(error => {
                 console.error(error);
@@ -216,40 +253,36 @@ const Statisticsalum = ({ page }) => {
                 console.error(error);
             }
             );
+
+
     }
 
 
     return (
         <>
-            <Alum page={page} />
+            <Alum page={page} datos={datos}/>
             <div className='body_index'>
                 <div className="main-container">
                     <Header page={page} page2={page} />
                     <div className="content">
                         <div className="sta-boxes">
-                            <div className='sta-box-t1 box box-m1 shadow-box'>
-                                <div className='sta-title-t1'>Calificaciones obtenidas en total de cursos</div>
+                            
+                            <div className='sta-box-t7 box box-m1 shadow-box'>
+                            <div className='sta-title-t7'><p>Tu promedio actual es de <br></br><h1>{promedioa}</h1></p></div>
+                            </div>
+
+                            <div className='sta-box-t1 box box-m2 shadow-box'>
+                            <div className='sta-title-t1'>{nombre} Estas son tus calificiones</div>
                                 <div className='sta-cont-img-t1'>
                                     <Bars midata={dataEstadisticaCalificaciones} misoptions={opcioneEstadisticaCalificaciones} className="max-box" />
                                 </div>
                             </div>
-                            <div className='sta-box-t1 box box-m2 shadow-box'>
-                                <div className='sta-title-t1'>Nivel académico de los alumnos</div>
-                                <div className='sta-cont-img-t1'>
-                                    <Pies midata={dataNivel} misoptions={opcionesNivel} className="max-box" />
-                                </div>
-                            </div>
+
                             <div className='sta-box-t2 box box-g shadow-box'>
                                 <div className='sta-cont-img-t2'>
                                     <Bars midata={dataTaller} misoptions={opcionesTaller} className="max-box" />
                                 </div>
                                 <div className='sta-title-t2'>Cursos con más inscripciones</div>
-                            </div>
-                            <div className='sta-box-t3 box box-g shadow-box'>
-                                <div className='sta-title-t2'>Edades de los estudiantes</div>
-                                <div className='sta-cont-img-t2'>
-                                    <LinesChart midata={dataEdad} misoptions={opcionesEdad} className="max-box canvas-g" />
-                                </div>
                             </div>
                         </div>
                     </div>
