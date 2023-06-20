@@ -2,12 +2,14 @@
     background-color: var(--background-gray);
     min-height: calc(100vh - 100px);
     display: grid;
+    height: fit-content !important;
     grid-template-columns: 1fr 2fr;
 }
 
 .p-main{
     display: grid;
     min-height: calc(100vh - 100px);
+    height: max-content;
     grid-template-rows: 3fr 3fr 2fr;
     padding: 0px 20px 15px 20px;
 }
@@ -86,6 +88,8 @@
 
 .p-info{
     min-height: calc(100vh - 100px);
+    height: fit-content;
+    max-height: max-content;
     display: grid;
     grid-template-rows: 1fr 11fr;
     padding: 5px;

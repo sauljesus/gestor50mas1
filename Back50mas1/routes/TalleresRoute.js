@@ -12,6 +12,10 @@ router.put('/tallercreate', talleresController.createtaller);
 
 router.put('/inscribirtaller', talleresController.createtaller);
 
+router.get('/taller/:taller', talleresController.getTaller);
+
+router.put('/talleredit/:taller',talleresController.updateTalleredit);
+
 
 
 module.exports = router;

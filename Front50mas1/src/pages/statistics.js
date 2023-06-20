@@ -51,6 +51,7 @@ const Statistics = ({ page }) => {
     var opcionesNivel = {
         responsive: true,
         maintainAspectRatio: false,
+        animation: false,
     };
     var dataNivel = {
         labels: nivelAcademico,
@@ -129,6 +130,7 @@ const Statistics = ({ page }) => {
         ],
     };
     var opcionesEdad = {
+        animation: false,
         plugins: {
             legend: {
                 display: false
