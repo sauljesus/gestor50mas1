@@ -18,6 +18,10 @@ router.put('/talleredit/:taller',talleresController.updateTalleredit);
 
 router.put('/tallerbycode/:codigo_taller',talleresController.getTallerbycode);
 
+router.get('/taller/:taller', talleresController.getTaller);
+
+router.put('/talleredit/:taller',talleresController.updateTalleredit);
+
 
 
 module.exports = router;

@@ -1,11 +1,12 @@
-.s-body_index { 
+.s-body_index {
     height: auto;
     width: 100vw;
     max-width: calc(100vw - 22.7vw);
     margin-left: 22.7vw;
     background-color: var(--background-gray);
 }
-.s-content{
+
+.s-content {
     background-color: var(--background-gray);
     margin: 15px;
     display: grid;
@@ -16,7 +17,7 @@
     padding-right: 10px;
 }
 
-.s-box-head{
+.s-box-head {
     background-color: var(--background-white);
     padding: 15px;
     display: flex;
@@ -24,12 +25,14 @@
     border: 1px solid var(--background-gray);
     max-height: 80px;
 }
-.s-text-head{
+
+.s-text-head {
     font-size: 1.6em;
     font-weight: 600;
     color: var(--text-dark);
 }
-.c-text-head{
+
+.c-text-head {
     font-size: 1.6em;
     font-weight: 600;
     color: var(--text-dark);
@@ -37,10 +40,11 @@
     padding-left: 30px;
 }
 
-.s-box-list{
+.s-box-list {
     display: block;
 }
-.s-box-element{
+
+.s-box-element {
     height: 70px;
     width: 100%;
     display: grid;
@@ -50,35 +54,40 @@
     background-color: var(--background-white);
 }
 
-.s-box-name{
+.s-box-name {
     display: grid;
     grid-template-columns: 1fr 5fr;
     padding: 0;
     margin: 0;
 }
-.s-box-foto{
+
+.s-box-foto {
     grid-row: 1/3;
     padding-left: 5px;
 }
-.s-img{
+
+.s-img {
     width: 50px;
     height: 50px;
     border-radius: 10px;
 }
-.s-box-nombre{
+
+.s-box-nombre {
     font-size: 1em;
     font-weight: 700;
     display: flex;
     align-items: flex-end;
     color: var(--text-dark);
 }
-.s-box-email{
+
+.s-box-email {
     display: flex;
     align-items: flex-start;
     font-size: .8em;
     color: var(--text-gray);
 }
-.s-status{
+
+.s-status {
     display: flex;
     color: #fff;
     align-items: center;
@@ -87,7 +96,8 @@
     border-radius: 50px;
     font-weight: 700;
 }
-.s-txt-fecha{
+
+.s-txt-fecha {
     display: flex;
     align-self: center;
     justify-content: center;
@@ -95,7 +105,8 @@
     font-size: .9em;
     font-weight: 500;
 }
-.s-txt-edit{
+
+.s-txt-edit {
     color: var(--text-gray);
     font-size: 1em;
     font-weight: 600;
@@ -104,14 +115,14 @@
     justify-content: center;
 }
 
-.s-status-generada{
-    background: rgb(55,189,52);
-    background: linear-gradient(117deg, rgba(55,189,52,1) 0%, rgba(132,226,46,1) 100%);
+.s-status-generada {
+    background: rgb(55, 189, 52);
+    background: linear-gradient(117deg, rgba(55, 189, 52, 1) 0%, rgba(132, 226, 46, 1) 100%);
 }
 
-.s-status-pendiente{
-    background: rgb(188,160,48);
-    background: linear-gradient(117deg, rgba(188,160,48,1) 0%, rgba(227,208,47,1) 100%);
+.s-status-pendiente {
+    background: rgb(188, 160, 48);
+    background: linear-gradient(117deg, rgba(188, 160, 48, 1) 0%, rgba(227, 208, 47, 1) 100%);
 }
 
 .s-float-icon {
@@ -131,28 +142,79 @@
     border: 1px solid var(--background-gray);
 }
 
-.c-box-head{
+.c-box-head {
     background-color: var(--background-white);
     padding: 15px;
     border-radius: 15px 15px 0px 0px;
     border: 1px solid var(--background-gray);
-    max-height: 80px;
+    max-height: 70px;
 }
-.c-search-box{
+
+.c-search-box {
     width: 100%;
     height: 90%;
     display: grid;
     grid-template-columns: 30% 70%;
 }
-.c-search-btn{
+
+.i-search-box {
+    width: 100%;
+    height: 90%;
+    display: grid;
+    grid-template-columns: 40% 30% 30%;
+}
+
+.i-form-container {
+    display: grid;
+    grid-template-columns: max-content 50% auto;
+    max-height: 50px;
+    padding: 5px;
+    align-items: center;
+    background-color: var(--background-white);
+    border-left: 1px solid var(--background-gray);
+    border-right: 1px solid var(--background-gray);
+}
+.i-details{
+    padding-right: 10px;
+    font-size: 1.1em;
+    font-weight: 400;
+    padding-left: 5px;
+}
+
+.i-table-header {
+    padding: 0px 5px 0 5px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    height: 40px;
+    width: 100%;
+    align-items: center;
+    border: 1px solid var(--background-gray);
+    background-color: var(--background-white);
+    margin: 0;
+}
+
+.i-box-nombre {
+    font-size: 1em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    color: var(--text-dark);
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+.c-search-btn {
     cursor: pointer;
 }
+
 .no-float {
     float: none;
     z-index: 0;
     width: 100%;
 }
-.no-float > * {
+
+.no-float>* {
     float: none;
     z-index: 0;
 
@@ -160,74 +222,85 @@
 
 
 
-@media only screen and (max-width: 768px){
-    .s-body_index { 
-      margin-left: 1vw;
-      max-width: 98vw;
-      width: 98vw;
+@media only screen and (max-width: 768px) {
+    .s-body_index {
+        margin-left: 1vw;
+        max-width: 98vw;
+        width: 98vw;
     }
-    .s-content{
+
+    .s-content {
         margin-bottom: 35px;
     }
-    
-  }
-  
-  
-  @media only screen and (max-width: 450px){
-  
-    .s-body_index { 
-      width: 100vw;
-      margin: 0;
-      max-width: 100vw;
-      height: auto;
+
+}
+
+
+@media only screen and (max-width: 450px) {
+
+    .s-body_index {
+        width: 100vw;
+        margin: 0;
+        max-width: 100vw;
+        height: auto;
     }
-    .s-status{
+
+    .s-status {
         margin: 0px 6px 0px 4px;
         font-weight: 700;
         padding-left: 20px;
         font-size: .8em;
         justify-content: flex-start;
         letter-spacing: 10px;
-        
+
         padding: 0 0px 0 6px;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
     }
-    .s-txt-fecha{
+
+    .s-txt-fecha {
         font-size: .7em;
         font-weight: 500;
     }
-    .s-txt-edit{
+
+    .s-txt-edit {
         font-size: .8em;
         font-weight: 600;
     }
-    .s-text-head{
+
+    .s-text-head {
         font-size: 1.4em;
     }
-    .c-text-head{
+
+    .c-text-head {
         font-size: 1.4em;
     }
-    .s-content{
+
+    .s-content {
         grid-template-rows: 60px auto;
     }
-    .s-box-element{
+
+    .s-box-element {
         grid-template-columns: 6fr 1fr 2fr 2fr;
     }
-    .s-box-nombre{
+
+    .s-box-nombre {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
     }
-    .s-box-email{
+
+    .s-box-email {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
     }
-    .s-float-icon { 
+
+    .s-float-icon {
         font-size: 1.8em;
         border-radius: 200px;
         width: 45px;
         height: 45px;
     }
-  }
+}

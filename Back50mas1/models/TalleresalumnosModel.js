@@ -22,44 +22,44 @@ const Talumno = db.define('talleres_alumno',{
     }, 
     correo:{
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         validate:{
-            notEmpty: true,
+            notEmpty: false,
             isEmail: true
         }
     }, 
     calificacion:{
         type: DataTypes.INTEGER,
         primaryKey: true,
-        allowNull: false,
+        allowNull: true,
         validate:{
-            notEmpty: true,
+            notEmpty: false,
             len: [1, 4]
         }
     },
     estado:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       enum: ['Aprobada','Reprobada'],
       validate:{
-          notEmpty: true,
+          notEmpty: false,
       }
     }, 
     certificado:{
         type: DataTypes.STRING,
         primaryKey: true,
-        allowNull: false,
+        allowNull: true,
         validate:{
-            notEmpty: true,
+            notEmpty: false,
             len: [1, 15]
         }
     },
     folioCertificado:{
         type: DataTypes.STRING,
         primaryKey: true,
-        allowNull: false,
+        allowNull: true,
         validate:{
-            notEmpty: true,
+            notEmpty: false,
             len: [1, 15]
         }
     }

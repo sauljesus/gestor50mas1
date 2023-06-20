@@ -17,6 +17,7 @@ import PDFContainer from '../containers/PDFContainer';
 import VerificaContainer from '../containers/verificaContainer';
 import StudentFormContainer from '../containers/studentFormContainer';
 import UserFormContainer from '../containers/UserFormContainer';
+import InscripcionesContainer from '../containers/inscripcionesContainer';
 
 //alumnos
 import StatisticsContaineralum from '../containers/statisticsContaineralum';
@@ -46,6 +47,7 @@ function App() {
           <Route exact path="/verifica/:folio" element={<VerificaContainer />}/>
           <Route exact path="/newAlumno" element={<StudentFormContainer />}/>
           <Route exact path="/newUser" element={<UserFormContainer />}/>
+          <Route exact path="/inscripciones" element={<InscripcionesContainer />}/>
           {/* alumnos */}
           <Route exact path="/alum/home" element={<StatisticsContaineralum />}/>
           <Route exact path="/alum/inscribir" element={<SingupContaineralum />}/>

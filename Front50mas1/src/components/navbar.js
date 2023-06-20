@@ -2,8 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import {AiFillHome, AiOutlineReconciliation} from 'react-icons/ai';
 import {GoThreeBars, GoGraph} from 'react-icons/go';
-import {BiSearchAlt, BiEdit} from 'react-icons/bi';
+import {BiSearchAlt, BiEdit, BiIdCard} from 'react-icons/bi';
 import {SiMicrosoftexcel} from 'react-icons/si';
+import {FaRegClipboard} from 'react-icons/fa';
 import descarga from '../images/descarga.png';
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom';
@@ -62,12 +63,16 @@ function Navbar({visible, show, page}) {
                             <span>Cargar información</span> 
                         </Link>
                         <Link to="/solicitudes" className={page==="Solicitudes" ? "nav-link-selected" : "nav-link" }>                            
-                            <div className='icones shadow-box'> <AiOutlineReconciliation/></div> 
+                            <div className='icones shadow-box'> <FaRegClipboard/></div> 
                             <span>Solicitudes</span> 
                         </Link>
                         <Link to="/mis-grupos" className={page==="Grupos" ? "nav-link-selected" : "nav-link" }>                            
                             <div className='icones shadow-box'> <AiOutlineReconciliation/></div> 
                             <span>Mis grupos</span> 
+                        </Link>
+                        <Link to="/inscripciones" className={page==="Inscripciones" ? "nav-link-selected" : "nav-link" }>                            
+                            <div className='icones shadow-box'> <BiIdCard/></div> 
+                            <span>Inscripciones</span> 
                         </Link>
                     </div>
                 </div>

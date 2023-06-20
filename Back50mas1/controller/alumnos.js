@@ -46,6 +46,7 @@ const getAlumnoById = async(req ,res) => {
 }
 const getAlumnoByBoleta = async(req ,res) => {
     try{
+        console.log(req.params.boleta);
         const response = await Alumno.findOne({
             attributes:['boleta','nombre','apellidoPaterno','apellidoMaterno',
                         'curp','rfc','estadoCivil','calle','numero','colonia',
