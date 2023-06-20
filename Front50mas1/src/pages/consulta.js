@@ -21,7 +21,7 @@ function Consulta({ page }) {
   const [showAlumno, setShowAlumno] = useState(true);
   const [showTaller, setShowTaller] = useState(false);
   const [showProfesor, setShowProfesor] = useState(false);
-  const [textPage, setTextPage] = useState("Registro de alumno");
+  const [textPage, setTextPage] = useState("Consulta de alumno");
 
 
   const setShow = (type) => {
@@ -111,9 +111,9 @@ function Consulta({ page }) {
           <Header page={page} page2={textPage} />
           <div className="s-content">
             <DropdownButton id="dropdown-basic-button" title='Seleccionar el tipo de Consulta' className='ing-drop'>
-              <Dropdown.Item onClick={() => { setShow("alumno"); setTextPage("Registro de alumno") }}>Alumno</Dropdown.Item>
-              <Dropdown.Item onClick={() => { setShow("taller"); setTextPage("Registro de taller") }}>Taller</Dropdown.Item>
-              <Dropdown.Item onClick={() => { setShow("profesor"); setTextPage("Registro de profesor") }}>Profesor</Dropdown.Item>
+              <Dropdown.Item onClick={() => { setShow("alumno"); setTextPage("Consulta de alumno") }}>Alumno</Dropdown.Item>
+              <Dropdown.Item onClick={() => { setShow("taller"); setTextPage("Consulta de taller") }}>Taller</Dropdown.Item>
+              <Dropdown.Item onClick={() => { setShow("profesor"); setTextPage("Consulta de profesor") }}>Profesor</Dropdown.Item>
             </DropdownButton>
 
             <div className={showAlumno ? "ing-content-form" : "ing-display-n"}>
@@ -178,7 +178,7 @@ function Consulta({ page }) {
                       <div className='s-box-email'>{taller.descripcion}</div>
                     </div>
                     <div className='s-txt-fecha'>{taller.periodo}</div>
-                    <Link to={`/edit/${taller.codigo_taller}`}>Editar</Link>
+                    <Link to={`/edit-taller/${taller.codigo_taller}`}>Editar</Link>
                   </div>
 
                 </div>
@@ -210,7 +210,7 @@ function Consulta({ page }) {
                       <div className='s-status-pendiente s-status'>{profesor.status}</div>
                     )}
                     <div className='s-txt-fecha'>{profesor.inicioLaboral}</div>
-                    <Link to={`/edit/${profesor.correo}`}>Editar</Link>
+                    <Link to={`/edit-profesor/${profesor.correo}`}>Editar</Link>
                   </div>
 
                 </div>

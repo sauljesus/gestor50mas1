@@ -8,4 +8,8 @@ const usuarioController = require('../controller/usuarios');
 
 router.get('/usuarios', usuarioController.getUsers);
 
+router.get('/usuario/:correo', usuarioController.getUserByCorreo);
+
+router.put('/profesoredit/:correo',usuarioController.updateProfesoredit);
+
 module.exports = router;
