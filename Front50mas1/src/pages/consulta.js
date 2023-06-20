@@ -128,7 +128,7 @@ function Consulta({ page }) {
                     <InputGroup.Text className={showClear ? 'c-search-btn' : 'qr'} onClick={() => clearSearch()}><CloseButton /></InputGroup.Text>
                     <InputGroup.Text className='c-search-btn' onClick={() => searchAlumno()}><BiSearchAlt /></InputGroup.Text>
                   </InputGroup>
-                  <div className='c-text-head'>Consulta de Usuarios</div>
+                  <div className='c-text-head'>Consulta de Alumnos</div>
                 </div>
               </div>
               {dataAlumno.map(alumno => (

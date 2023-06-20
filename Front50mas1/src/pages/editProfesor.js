@@ -105,28 +105,28 @@ function EditProfesor({ page }) {
                                     <div className="column">
                                         <div className="form-field">
                                             <label htmlFor="nombre">Nombre:</label>
-                                            <input type="text" id="name" className='cimput' value={profe.nombre} onChange={(e) => setProfe({
+                                            <input required maxLength={30} type="text" id="name" className='cimput' value={profe.nombre} onChange={(e) => setProfe({
                                                 ...profe,
                                                 nombre: e.target.value
                                             })} />
                                         </div>
                                         <div className="form-field">
                                             <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
-                                            <input type="text" id="appat" className='cimput' value={profe.apellidoPaterno} onChange={(e) => setProfe({
+                                            <input required maxLength={30} type="text" id="appat" className='cimput' value={profe.apellidoPaterno} onChange={(e) => setProfe({
                                                 ...profe, apellidoPaterno: e.target.value
                                             })}
                                             />
                                         </div>
                                         <div className="form-field">
                                             <label htmlFor="apellidoMaterno">Apellido Materno:</label>
-                                            <input type="text" id="apmat" className='cimput' value={profe.apellidoMaterno} onChange={(e) => setProfe({
+                                            <input required maxLength={30} type="text" id="apmat" className='cimput' value={profe.apellidoMaterno} onChange={(e) => setProfe({
                                                 ...profe, apellidoMaterno: e.target.value
                                             })}
                                             />
                                         </div>
                                         <div className="form-field">
                                             <label htmlFor="correo">Correo:</label>
-                                            <input type="text" id="correo" className='cimput' value={profe.correo} onChange={(e) => setProfe({
+                                            <input required maxLength={30} type="text" id="correo" className='cimput' value={profe.correo} onChange={(e) => setProfe({
                                                 ...profe, correo:
                                                     e.target.value
                                             })}
