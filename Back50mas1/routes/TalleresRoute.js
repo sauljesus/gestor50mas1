@@ -16,6 +16,8 @@ router.get('/taller/:taller', talleresController.getTaller);
 
 router.put('/talleredit/:taller',talleresController.updateTalleredit);
 
+router.put('/tallerbycode/:codigo_taller',talleresController.getTallerbycode);
+
 
 
 module.exports = router;

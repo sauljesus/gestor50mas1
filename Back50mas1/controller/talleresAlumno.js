@@ -1,5 +1,6 @@
 const { QueryTypes } = require('sequelize');
 const db = require('../config/Database');
+const Talumno = require('../models/TalleresalumnosModel');
 
 const getMiGrupo = async (req, res) => {
     try {
@@ -24,7 +25,43 @@ const setCalificaciones = async (req, res) => {
     }
 }
 
+
+const setCertificado = async (req, res) => {
+    const {folioCertificado , boleta , codigo_taller } = req.body;
+    try {
+        await Talumno.update({
+            folioCertificado: folioCertificado, 
+        }, {
+            where: {
+                boleta: boleta,
+                codigo_taller: codigo_taller
+            }
+        });
+        res.status(200).json({ msg: "Tabla actualizada" });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ msg: error.message });
+    }
+}
+
+const getCertsbyboleta = async(req ,res) => {
+    try{
+        const response = await Talumno.findAll({
+            attributes:['boleta','codigo_taller','calificacion','estado','folioCertificado'],//Falta usrpic en db;
+            where: {
+                boleta: req.params.boleta
+            }
+        });
+        console.log(response)
+        res.status(200).json(response);
+    } catch(error){
+        res.status(500).json({msg: error.message});
+    }
+}
+
 module.exports = {
     getMiGrupo,
     setCalificaciones,
+    setCertificado,
+    getCertsbyboleta
 };

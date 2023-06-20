@@ -6,4 +6,9 @@ router.get('/miGrupo/:grupo', talleresAlumnoController.getMiGrupo);
 
 router.post('/setCalificaciones/:grupo', talleresAlumnoController.setCalificaciones);
 
+router.put('/setcertificado', talleresAlumnoController.setCertificado);
+
+router.get('/studentcert/:boleta', talleresAlumnoController.getCertsbyboleta);
+
+
 module.exports = router;

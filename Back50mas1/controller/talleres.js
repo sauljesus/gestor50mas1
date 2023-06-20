@@ -58,6 +58,20 @@ const getTaller = async (req, res) => {
     }
 };
 
+const getTallerbycode = async (req, res) => {
+    try {
+        const response = await Talleres.findOne({
+            attributes: ['codigo_taller', 'correo', 'nombre', 'descripcion', 'periodo'],
+            where: {
+                codigo_taller: req.params.codigo_taller
+            }
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+};
+
 const updateTalleredit = async (req, res) => {
     const user = await Talleres.findOne({
         where: {
@@ -94,4 +108,5 @@ module.exports = {
     getTalleresByCorreo,
     getTaller,
     updateTalleredit,
+    getTallerbycode
 };

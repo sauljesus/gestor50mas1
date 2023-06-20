@@ -45,17 +45,9 @@ function Navbaralum({visible, show, page}) {
                             <div className='icones shadow-box'> <GoGraph/></div> 
                             <span>Estadísiticas</span> 
                         </Link>
-                        <NavLink to="/alum/inscribir" className={page==="Ingreos Manual" ? "nav-link-selected" : "nav-link" }>                            
-                            <div className='icones shadow-box'> <BiEdit/></div> 
-                            <span>Incribir talleres</span> 
-                        </NavLink>
-                        <Link to="/alum/solicitudes" className={page==="Solicitudes" ? "nav-link-selected" : "nav-link" }>                            
-                            <div className='icones shadow-box'> <AiOutlineReconciliation/></div> 
-                            <span>Solicitar constancia</span> 
-                        </Link>
                         <Link to="/alum/mis-grupos" className={page==="Grupos" ? "nav-link-selected" : "nav-link" }>                            
                             <div className='icones shadow-box'> <AiOutlineReconciliation/></div> 
-                            <span>Talleres actuales</span> 
+                            <span>Calificaciones</span> 
                         </Link>
                     </div>
                 </div>
