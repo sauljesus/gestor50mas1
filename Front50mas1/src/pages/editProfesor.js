@@ -8,6 +8,8 @@ import IMG from "../images/descarga.png";
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 function EditProfesor({ page }) {
     const [profe, setProfe] = useState([]);
@@ -21,7 +23,7 @@ function EditProfesor({ page }) {
     }, []);
 
     const fetchProfesor = () => {
-        axios.get(`http://localhost:5000/usuario/${correo}`)
+        axios.get(`${getdireccion()}/usuario/${correo}`)
             .then(response => {
                 setProfe(response.data);
             })
@@ -40,7 +42,7 @@ function EditProfesor({ page }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put('http://localhost:5000/profesoredit/' + correo, profe);
+            const response = await axios.put(`${getdireccion()}/profesoredit/${correo}`, profe);
 
             setShowNotification(true);
             setMsgNoti("Profesor actualizado correctamente");

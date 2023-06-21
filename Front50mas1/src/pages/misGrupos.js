@@ -6,6 +6,8 @@ import Header from '../components/header';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 
 const MisGrupos = ({ page, page2 }) => {
@@ -18,7 +20,7 @@ const MisGrupos = ({ page, page2 }) => {
     }, []);
 
     const fetchData = () => {
-        axios.get(`http://localhost:5000/misTalleres/${correo}`)
+        axios.get(`${getdireccion()}/misTalleres/${correo}`)
             .then(response => {
                 setData(response.data);
             })

@@ -7,6 +7,8 @@ import Navbar from '../components/navbar';
 import Header from '../components/header';
 import IMG from "../images/descarga.png";
 import Alert from 'react-bootstrap/Alert';
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 
 function Solicitudes({ page }) {
@@ -22,7 +24,7 @@ function Solicitudes({ page }) {
   }, []);
 
   const fetchCertificados = () => {
-    axios.get('http://localhost:5000/certificados')
+    axios.get(`${getdireccion()}/certificados`)
       .then(response => {
         setCertificados(response.data);
       })

@@ -8,6 +8,8 @@ import IMG from "../images/descarga.png";
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 function EditTaller({ page }) {
     const [talleres, setTalleres] = useState([]);
@@ -21,7 +23,7 @@ function EditTaller({ page }) {
     }, []);
 
     const fetchTaller = () => {
-        axios.get(`http://localhost:5000/taller/${taller}`)
+        axios.get(`${getdireccion()}/taller/${taller}`)
             .then(response => {
                 setTalleres(response.data);
             })
@@ -40,7 +42,7 @@ function EditTaller({ page }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put('http://localhost:5000/talleredit/' + talleres.codigo_taller, talleres);
+            const response = await axios.put(`${getdireccion()}/talleredit/${talleres.codigo_taller}`, talleres);
 
             setShowNotification(true);
             setMsgNoti("Taller actualizado correctamente");

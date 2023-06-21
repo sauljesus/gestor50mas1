@@ -6,6 +6,8 @@ import { PDFViewer } from '@react-pdf/renderer';
 import axios from 'axios';
 import { QRCodeCanvas } from "qrcode.react";
 import {useLocation} from 'react-router-dom';
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 const PDF = () => {
     const location = useLocation();
@@ -16,7 +18,7 @@ const PDF = () => {
     }, []);
 
     const fetchData = () => {
-        axios.get(`http://localhost:5000/certificado/${location.state.folio}`)
+        axios.get(`${getdireccion()}/certificado/${location.state.folio}`)
           .then(response => {
             console.log(response.data[0]);
             setData(response.data[0]);

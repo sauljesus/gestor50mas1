@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
 import { useParams } from 'react-router-dom';
+import { getdireccion } from '../../helpers/direccion';
 
 
 const Statisticsalum = ({ page}) => {
@@ -256,7 +257,7 @@ const Statisticsalum = ({ page}) => {
 
 
     }
-
+    
 
     return (
         <>

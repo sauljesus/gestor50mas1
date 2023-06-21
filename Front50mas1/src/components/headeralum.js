@@ -5,6 +5,10 @@ import {BsGearFill, BsFillBellFill, BsBorder} from 'react-icons/bs';
 import '../styles/navbar.css';
 
 function Header({page, page2, alumno}) {
+    const logOut = () =>{
+        localStorage.removeItem('jwt');
+        window.location.replace('/');
+    }
 	return (
         <div className="header">
             <div className="route">
@@ -26,7 +30,7 @@ function Header({page, page2, alumno}) {
                     <BsGearFill/>
                 </div>
                 <div className="route-icons">
-                    <button style={{border:'none'}}><FaSignOutAlt/></button>
+                    <button style={{border:'none'}} onClick={logOut} title='Cerrar Sesión'><FaSignOutAlt/></button>
                 </div>
             </div>
         </div>

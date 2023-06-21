@@ -8,6 +8,8 @@ import Row from 'react-bootstrap/Row';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import CloseButton from 'react-bootstrap/CloseButton';
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 const Grupo = ({ page, page2 }) => {
   const location = useLocation();
@@ -23,7 +25,7 @@ const Grupo = ({ page, page2 }) => {
   }, []);
 
   const fetchData = () => {
-    axios.get(`http://localhost:5000/miGrupo/${codigo}`)
+    axios.get(`${getdireccion()}/miGrupo/${codigo}`)
       .then(response => {
         setData(response.data);
         response.data.forEach(calificacion => {
@@ -40,7 +42,7 @@ const Grupo = ({ page, page2 }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5000/setCalificaciones/${codigo}`, calificaciones);
+      const response = await axios.post(`${getdireccion()}/setCalificaciones/${codigo}`, calificaciones);
       setMessage("Calificaciones guardadas correctamente");
     } catch (error) {
       setMessage(error);

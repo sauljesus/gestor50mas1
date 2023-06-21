@@ -8,6 +8,8 @@ import IMG from "../images/descarga.png";
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 function Edit({ page }) {
   const [alumno, setAlumno] = useState([]);
@@ -20,7 +22,7 @@ function Edit({ page }) {
   }, []);
 
   const fetchAlumnos = () => {
-    axios.get(`http://localhost:5000/alumno/${boleta}`)
+    axios.get(`${getdireccion()}/alumno/${boleta}`)
       .then(response => {
         setAlumno(response.data);
       })
@@ -39,7 +41,7 @@ function Edit({ page }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put('http://localhost:5000/alumnoedit/' + alumno.boleta, alumno);
+      const response = await axios.put(`${getdireccion()}/alumnoedit/${alumno.boleta}` , alumno);
 
       setShowNotification(true);
       // Ocultar la notificación después de 3 segundos

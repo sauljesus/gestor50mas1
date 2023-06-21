@@ -7,6 +7,8 @@ import LinesChart from '../components/LineChart';
 import Pies from '../components/PiesChart';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 
 const Statistics = ({ page }) => {
@@ -153,7 +155,7 @@ const Statistics = ({ page }) => {
     }, []);
 
     const fetchData = () => {
-        axios.get(`http://localhost:5000/estadistica1`)
+        axios.get(`${getdireccion()}/estadistica1`)
             .then(response => {
                 let data = response.data;
                 let cantPromedio = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -166,7 +168,7 @@ const Statistics = ({ page }) => {
                 console.error(error);
             }
             );
-        axios.get(`http://localhost:5000/estadistica2`)
+        axios.get(`${getdireccion()}/estadistica2`)
             .then(response => {
                 let data = response.data;
                 let nivel = [];
@@ -182,7 +184,7 @@ const Statistics = ({ page }) => {
                 console.error(error);
             }
             );
-        axios.get(`http://localhost:5000/estadistica3`)
+        axios.get(`${getdireccion()}/estadistica3`)
             .then(response => {
                 let data = response.data;
                 let taller = [];
@@ -198,7 +200,7 @@ const Statistics = ({ page }) => {
                 console.error(error);
             }
             );
-        axios.get(`http://localhost:5000/estadistica4`)
+        axios.get(`${getdireccion()}/estadistica4`)
             .then(response => {
                 let data = Object.entries(response.data[0]);
                 let rangos = [];

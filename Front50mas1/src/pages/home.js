@@ -7,6 +7,8 @@ import Navbar from '../components/navbar';
 import Header from '../components/header';
 import IMG1 from "../images/descarga2.png";
 import IMG2 from "../images/desgarga3.jpg";
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 
 const Home = ({ page}) => (

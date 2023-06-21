@@ -7,6 +7,8 @@ import Navbar from '../components/navbar';
 import Header from '../components/header';
 import DndropImage from '../components/Dnd';
 import IMG from "../images/descarga.png";
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 const Masive = ({page}) => {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -41,7 +43,7 @@ const Masive = ({page}) => {
       });
   
       // Send the file to the server using an HTTP request
-      xhr.open('POST', 'http://localhost:5000/upload');
+      xhr.open('POST', `${getdireccion()}/upload`);
       xhr.send(formData);
 
       
