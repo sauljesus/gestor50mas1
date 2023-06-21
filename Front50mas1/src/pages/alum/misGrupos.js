@@ -143,7 +143,7 @@ const StudentGroups = ({ page, page2 }) => {
                                         <td>{calificacion.codigo_taller}</td>
                                         <td>{calificacion.taller}</td>
                                         <td>{calificacion.periodo}</td>
-                                        <td>{calificacion.calificacion}</td>
+                                        <td>{calificacion.calificacion}</td> 
                                         <td>{calificacion.estado}</td>
                                         {calificacion.estado == "Aprobada" ? (
                                             <td><Alert.Link variant="primary" onClick={() => { generarCadenaCompuesta(calificacion.boleta, calificacion.codigo_taller) }}>Solicitar Constancia</Alert.Link></td>

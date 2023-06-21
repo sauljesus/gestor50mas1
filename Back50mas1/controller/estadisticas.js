@@ -41,6 +41,26 @@ const getEstadistica4 = async(req ,res) => {
     }
 }
 
+const getEstadistica6 = async(req ,res) => {
+    try{
+        const response = await db.query("SELECT COUNT(*) AS total, calificacion FROM talleres_alumno WHERE boleta = "+req.params.boleta+" GROUP BY calificacion;", { type: QueryTypes.SELECT });
+        res.status(200).json(response);
+    } catch(error){
+        res.status(500).json({msg: error.message}); 
+    }
+}
+
+const getEstadistica7 = async(req ,res) => {
+    try{
+        const response = await db.query("SELECT AVG(calificacion) AS promedio_calificaciones FROM talleres_alumno WHERE boleta = "+req.params.boleta+";", { type: QueryTypes.SELECT });
+        console.log(response)
+        res.status(200).json(response);
+    } catch(error){
+        res.status(500).json({msg: error.message}); 
+    }
+}
+
+
 
 module.exports = {
     getTest,
@@ -48,4 +68,6 @@ module.exports = {
     getEstadistica2,
     getEstadistica3,
     getEstadistica4,
+    getEstadistica6,
+    getEstadistica7,
 };

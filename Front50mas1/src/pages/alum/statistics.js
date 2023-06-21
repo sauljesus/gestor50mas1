@@ -28,11 +28,12 @@ const Statisticsalum = ({ page}) => {
   const [datos, setDatos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { state } = location;
+  const boletatest = "2023060033";
 
 
     useEffect(
         () => {
-        console.log(boleta);
+        console.log(boletatest);
         }, [location]
         
 
@@ -181,7 +182,7 @@ const Statisticsalum = ({ page}) => {
 
     const fetchData = () => {
 
-        axios.get(`http://localhost:5000/estadistica6/`+boleta)
+        axios.get(`http://localhost:5000/estadistica6/`+boletatest)
             .then(response => {
                 let data = response.data;
                 let cantPromedio = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -195,11 +196,12 @@ const Statisticsalum = ({ page}) => {
             }
             );
 
-            axios.get(`http://localhost:5000/estadistica7/`+boleta)
+            axios.get(`http://localhost:5000/estadistica7/`+boletatest)
             .then(response => {
                 let data = response.data;
                 let promediod =data[0].promedio_calificaciones;
-                setPromedio(promediod);
+                let numeroFormateado = parseFloat(promediod).toString()
+                setPromedio(numeroFormateado);
 
             })
             .catch(error => {
@@ -277,13 +279,6 @@ const Statisticsalum = ({ page}) => {
                                 <div className='sta-cont-img-t1'>
                                     <Bars midata={dataEstadisticaCalificaciones} misoptions={opcioneEstadisticaCalificaciones} className="max-box" />
                                 </div>
-                            </div>
-
-                            <div className='sta-box-t2 box box-g shadow-box'>
-                                <div className='sta-cont-img-t2'>
-                                    <Bars midata={dataTaller} misoptions={opcionesTaller} className="max-box" />
-                                </div>
-                                <div className='sta-title-t2'>Cursos con más inscripciones</div>
                             </div>
                         </div>
                     </div>

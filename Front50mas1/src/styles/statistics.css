@@ -18,6 +18,19 @@
     height: 300px;
     width: 100%;
 }
+
+
+.sta-box-t7{
+    
+    display: flex;
+  justify-content: center;
+  align-items: center;
+    color: var(--text-dark);
+    font-weight: 600;
+    height: 300px;
+    width: 100%;
+}
+
 .max-box{
     max-width: 100%;
 }
@@ -28,6 +41,15 @@
     font-size: 1.2em;
     font-weight: 700;
 }
+
+.sta-title-t7{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+}
+
+
 .sta-cont-img-t1{
     display: flex;
     align-items: center;

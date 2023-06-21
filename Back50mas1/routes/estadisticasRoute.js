@@ -11,4 +11,8 @@ router.get('/estadistica2', estadisticaController.getEstadistica2);
 router.get('/estadistica3', estadisticaController.getEstadistica3);
 router.get('/estadistica4', estadisticaController.getEstadistica4);
 
+router.get('/estadistica6/:boleta', estadisticaController.getEstadistica6);
+
+router.get('/estadistica7/:boleta', estadisticaController.getEstadistica7);
+
 module.exports = router;
