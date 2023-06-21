@@ -109,6 +109,7 @@ const StudentGroups = ({ page, page2 }) => {
         .catch(error => {
             console.error(error);
             
+
         });
       }
    
@@ -143,8 +144,13 @@ const StudentGroups = ({ page, page2 }) => {
                                         <td>{calificacion.periodo}</td>
                                         <td>{calificacion.calificacion}</td>
                                         <td>{calificacion.estado}</td>
-                                        <td><Alert.Link variant="primary" onClick={() => {generarCadenaCompuesta(calificacion.boleta, calificacion.codigo_taller)}}>Solicitar Constancia</Alert.Link></td>
-                                    </tr>
+                                        {calificacion.estado == "Aprobada" ? (
+                                            <td><Alert.Link variant="primary" onClick={() => { generarCadenaCompuesta(calificacion.boleta, calificacion.codigo_taller) }}>Solicitar Constancia</Alert.Link></td>
+
+                                        ) : (
+                                            <td><Alert.Link variant="primary"></Alert.Link></td>
+                                        )}
+                                         </tr>
                                 ))}
                             </tbody>
                         </Table>
