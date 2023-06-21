@@ -7,6 +7,8 @@ import Header from '../components/header';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import '../styles/ingreso.css';
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 
 const IngresoManual = ({ page }) => {
@@ -58,7 +60,7 @@ const IngresoManual = ({ page }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.put('http://localhost:5000/alumnocreate/'+alumno.boleta, alumno);
+          const response = await axios.put(`${getdireccion()}/alumnocreate/${alumno.boleta}`, alumno);
         
           setShowNotification(true);
           // Ocultar la notificación después de 3 segundos
@@ -74,7 +76,7 @@ const IngresoManual = ({ page }) => {
     const handleSubmit_profesor = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.put('http://localhost:5000/profesorcreate/'+profesor.id_profesor, profesor);
+          const response = await axios.put(`${getdireccion()}/profesorcreate/${profesor.id_profesor}`, profesor);
         
           setShowNotification(true);
           // Ocultar la notificación después de 3 segundos
@@ -90,7 +92,7 @@ const IngresoManual = ({ page }) => {
     const handleSubmit_taller = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.put('http://localhost:5000/tallercreate', taller);
+          const response = await axios.put(`${getdireccion()}/tallercreate`, taller);
           setShowNotification(true);
           // Ocultar la notificación después de 3 segundos
           setTimeout(() => {
@@ -137,11 +139,7 @@ const IngresoManual = ({ page }) => {
             'status':'Activo'
         };
         console.log(user);
-        //server
-        //axios.post(`http://20.55.91.62:5000/users`,user).then((res)=>{
-          //local
-        axios.post(`http://localhost:5000/alumno`,user).then((res)=>{
-          //console.log(res);
+        axios.post(`${getdireccion()}/alumno`,user).then((res)=>{
           console.log(res.data.errors[0].msg);
           setMessage(res.data.msg);
           setShowNotification(true);
@@ -149,7 +147,6 @@ const IngresoManual = ({ page }) => {
               setShowNotification(false);
             }, 5000);
           alert();
-          window.location.replace('/');
         }).catch((err)=>{
             var mensaje = ""
             for (var i = 0;i<err.response.data.errors.length;i++){
@@ -162,7 +159,6 @@ const IngresoManual = ({ page }) => {
             setTimeout(() => {
                 setShowNotification(false);
               }, 5000);
-            //window.location.replace(`/`);
         })
     }
     const [estadotype,setestadotype] = useState(['Soltero', 'Casado','Divorciado','Viudo','Union_Libre']);

@@ -12,6 +12,7 @@ import Edit from '../../pages/edit';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link } from 'react-router-dom';
+import { getdireccion } from '../../helpers/direccion';
 
 const Signup =({page})=> {
   const [talleres, setTalleres] = useState([]);
@@ -28,7 +29,7 @@ const Signup =({page})=> {
 
 
   const fetchTalleres = () => {
-    axios.get('http://localhost:5000/talleres')
+    axios.get(`${getdireccion()}/talleres`)
       .then(responset => {
         console.log(responset.data);
         setTalleres(responset.data);

@@ -3,6 +3,8 @@ import axios from 'axios';
 import '../styles/verifica.css';
 import { useParams } from 'react-router-dom';
 import IMG from "../images/50+1logo.png";
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 function Verifica() {
     const [data, setData] = useState([]);
@@ -14,7 +16,7 @@ function Verifica() {
     }, []);
 
     const fetchAlumnos = () => {
-        axios.get(`http://localhost:5000/certificado/${folio}`)
+        axios.get(`${getdireccion()}/certificado/${folio}`)
             .then(response => {
                 setData(response.data[0]);
             })

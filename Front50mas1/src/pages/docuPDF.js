@@ -1,6 +1,8 @@
 import React from "react";
 import { Document, Page, Text, View, Image, StyleSheet, Svg } from "@react-pdf/renderer";
 import LOGO from "../images/50+1logo.png";
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 const DocuPDF = ({data, folio}) => {
     let canvas = document.querySelector("canvas");

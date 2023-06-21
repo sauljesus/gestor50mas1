@@ -13,6 +13,8 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { BiSearchAlt } from 'react-icons/bi';
 import CloseButton from 'react-bootstrap/CloseButton';
+import { getdireccion } from '../helpers/direccion';
+
 
 function Consulta({ page }) {
   const [alumnos, setAlumnos] = useState([]);
@@ -49,7 +51,7 @@ function Consulta({ page }) {
   }, []);
 
   const fetchAlumnos = () => {
-    axios.get('http://localhost:5000/alumnos')
+    axios.get(`${getdireccion()}/alumnos`)
       .then(response => {
         setAlumnos(response.data);
         setDataAlumno(response.data);
@@ -60,7 +62,7 @@ function Consulta({ page }) {
   };
 
   const fetchTalleres = () => {
-    axios.get('http://localhost:5000/talleres')
+    axios.get(`${getdireccion()}/talleres`)
       .then(response => {
         setTalleres(response.data);
       })
@@ -70,7 +72,7 @@ function Consulta({ page }) {
   };
 
   const fetchProfesores = () => {
-    axios.get('http://localhost:5000/usuarios')
+    axios.get(`${getdireccion()}/usuarios`)
       .then(responsep => {
         setProfesores(responsep.data);
       })

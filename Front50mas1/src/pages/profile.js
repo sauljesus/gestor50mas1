@@ -4,6 +4,8 @@ import {AiFillCamera} from 'react-icons/ai';
 import Navbar from '../components/navbar';
 import Header from '../components/header';
 import IMG from "../images/descarga.png";
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 
 const Profile = ({ page, page2}) => (

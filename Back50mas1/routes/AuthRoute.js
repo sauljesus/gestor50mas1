@@ -16,8 +16,7 @@ router.post('/loginUser',[
     check('password','El password es obligatoria').not().isEmpty(),
     validarCampos
 ], LoginUser);
- router.get('/checkJwt',[validartoken],validarSesion)
+ router.get('/checkJwt',validarSesion)
 
-router.delete('/logout', LogOut); 
 
 module.exports = router;

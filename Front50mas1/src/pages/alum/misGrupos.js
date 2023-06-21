@@ -6,6 +6,7 @@ import Header from '../../components/headeralum';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
+import { getdireccion } from '../../helpers/direccion';
 
 
 const StudentGroups = ({ page, page2 }) => {
@@ -24,7 +25,7 @@ const StudentGroups = ({ page, page2 }) => {
         Asociar();
     }, []);
     const fetchData = () => {
-        axios.get(`http://localhost:5000/studentcert/${boleta}`)
+        axios.get(`${getdireccion()}/studentcert/${boleta}`)
         
             .then(response => {
                 setData(response.data);
@@ -33,7 +34,7 @@ const StudentGroups = ({ page, page2 }) => {
                 console.error(error);
             });
 
-            axios.get(`http://localhost:5000/talleres`)
+            axios.get(`${getdireccion()}/talleres`)
             .then(response => {
                 setDatataller(response.data);
             })
@@ -94,7 +95,7 @@ const StudentGroups = ({ page, page2 }) => {
             codigo_taller: codigo_taller,
           };
 
-        axios.post(`http://localhost:5000/requestc/`+folioCertificado)
+        axios.post(`/requestc/`+folioCertificado)
         .then(response => {
             setDatataller(response.data);
         })
@@ -102,7 +103,7 @@ const StudentGroups = ({ page, page2 }) => {
             console.error(error);
         });
 
-        axios.put(`http://localhost:5000/setcertificado`,update)
+        axios.put(`${getdireccion()}/setcertificado`,update)
         .then(response => {
             setDatataller(response.data);
         })

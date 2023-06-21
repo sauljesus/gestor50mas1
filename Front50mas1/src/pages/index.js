@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import axios from 'axios';
+import Axios  from 'axios';
 import '../styles/Index.css';
 import { Fade } from "react-awesome-reveal";
 import IMG from "../images/50+1logo.png";
@@ -8,68 +8,57 @@ import Imgc from "../images/Constancia.png";
 import Imga from "../images/Actualizacion.png";
 import { useNavigate } from 'react-router-dom';
 import ParticlesComponent from '../components/Particles';
+import { getdireccion } from '../helpers/direccion';
 
 
 
 const Index = ({scrollDown}) => {
     const [correo, setCorreo] = useState('');
     const [password, setPassword] = useState('');
+    const [alumno,setAlumno] = useState(null);
+    const [cargarUsuario,setcargarUsuario] = useState(true);
     const [showNotification, setShowNotification] = useState(false);
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        const jwt = window.localStorage.getItem('token');
-        console.log(jwt);
-        if (jwt != null){
-            alert("sesion abierta")
+    useEffect(()=>{ 
+        async function cargarUsuario(){
+            console.log("token "+ localStorage.getItem('jwt'));
+            if(!(localStorage.getItem('jwt'))){
+                setcargarUsuario(false);
+                return;
+            }
+            try {
+                const  {data}  = await Axios.get(`${getdireccion()}/checkJwt`,{headers:{'Authorization':localStorage.getItem('jwt')}});
+                console.log(data);
+                setMessage("login existente redirigiendo");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/alum/home`);
+                  }, 3000);
+            }catch(err){
+                console.log(err);
+
+            }
         }
-    })
-
-
-    const selUsuario2= async (e) =>{
-        e.preventDefault();
-        const user = {"correo":correo,"password":password};   
-        //console.log(user);  
-        
-        //local
-        axios.post(`http://localhost:5000/login`,user).then((res)=>{
-    
-        //serve
-        //axios.post(`http://20.55.91.62:5000/login`,user).then((res)=>{
-            const data = {
-                user: user.correo,
-                token: res.data.jwt,
-                boleta:res.data.boleta,
-              };
-              console.log(data);
-            //navigate('/alum/home',{state: data});
-            window.localStorage.setItem('token',res.data.jwt)
-        }).catch((err)=>{
-          console.log(err.response.data.msg)
-          alert(`Error: ${err.response.data.msg}`)
-        })
-    
-      }
+        cargarUsuario();
+    },[])
 
     const selUsuario= async (e) =>{
         e.preventDefault();
-        const user = {"correo":`${e.target.elements.txtEmail.value}`,"password":`${e.target.elements.txtPass.value}`};   
-        //local
-        axios.post(`http://localhost:5000/loginAlumno`,user).then((res)=>{
-        //server
-        //axios.post(`http://20.55.91.62:5000/login`,user).then((res)=>{
-            //history.push('/boardappI', {user: user.correo, token: res.data.jwt, tipo: "profesor", room:res.data.id});
-            window.localStorage.setItem('token',res.data.jwt);
-            window.localStorage.setItem('correo',user.correo);
-            window.localStorage.setItem('boleta',res.data.bol)
+        const alumno = {"correo":`${e.target.elements.txtEmail.value}`,"password":`${e.target.elements.txtPass.value}`};   
+        Axios.post(`${getdireccion()}/loginAlumno`,alumno).then((res)=>{
             const ms = "Login Exitoso";
             setMessage(ms);
             setShowNotification(true);
             setTimeout(() => {
                 setShowNotification(false);
               }, 5000);
-              
+             console.log(res.data.info);
+             console.log(res.data.jwt); 
+             localStorage.setItem('jwt',res.data.jwt)
+             //console.log(res.data.info);
+             //console.log(res.data.jwt);
             window.location.replace(`/alum/home`);
         }).catch((err)=>{
             setMessage(err.response.data.msg);

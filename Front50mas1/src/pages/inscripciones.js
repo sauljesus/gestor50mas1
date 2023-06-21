@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { BiSearchAlt } from 'react-icons/bi';
+import { getdireccion } from '../helpers/direccion';
+//${getdireccion()}
 
 function Inscripciones({ page }) {
   const [textPage, setTextPage] = useState("Inscribir alumno");
@@ -40,12 +42,12 @@ function Inscripciones({ page }) {
 
 
   const fetchTalleres = () => {
-    axios.get(`http://localhost:5000/alumno/${sAlumno}`)
+    axios.get(`${getdireccion()}/alumno/${sAlumno}`)
       .then(response => {
         if (response.data) {
           setStatus(response.data.status);
           setShowTable(true);
-          axios.get(`http://localhost:5000/talleresAlumno/talleresInscrito/${sAlumno}`)
+          axios.get(`${getdireccion()}/talleresAlumno/talleresInscrito/${sAlumno}`)
             .then(response => {
               setTalleres(response.data);
             })
@@ -78,7 +80,7 @@ function Inscripciones({ page }) {
       }
     });
     if (flag)
-      axios.post(`http://localhost:5000/talleresAlumno/inscribirATaller`, { alumno: sAlumno, taller: sTaller })
+      axios.post(`${getdireccion()}/talleresAlumno/inscribirATaller`, { alumno: sAlumno, taller: sTaller })
         .then(response => {
           setSTaller("");
           setNotiMsg(response.data.msg);
@@ -115,7 +117,7 @@ function Inscripciones({ page }) {
 
   const [dataAlumno, setDataAlumno] = useState([]);
   const fetchAlumnos = () => {
-    axios.get('http://localhost:5000/alumnos')
+    axios.get(`${getdireccion()}/alumnos`)
       .then(response => {
         setAlumnos(response.data);
         setDataAlumno(response.data);
