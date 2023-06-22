@@ -27,7 +27,7 @@ const setCalificaciones = async (req, res) => {
 
 const getTalleresInscrito = async (req, res) => {
     try {
-        const response = await db.query(`SELECT A.codigo_taller, A.nombre, B.estado, B.calificacion, A.periodo FROM talleres A, talleres_alumno B WHERE A.codigo_taller = B.codigo_taller AND boleta = '${req.params.boleta}';`, { type: QueryTypes.SELECT });
+        const response = await db.query(`SELECT B.boleta, A.codigo_taller, A.nombre, B.estado, B.calificacion, A.periodo FROM talleres A, talleres_alumno B WHERE A.codigo_taller = B.codigo_taller AND boleta = '${req.params.boleta}';`, { type: QueryTypes.SELECT });
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({ msg: error.message });
@@ -64,6 +64,7 @@ const inscribirATaller = async (req, res) => {
 
 const setCertificado = async (req, res) => {
     const {folioCertificado , boleta , codigo_taller } = req.body;
+    console.log(req.body);
     try {
         await Talumno.update({
             folioCertificado: folioCertificado, 

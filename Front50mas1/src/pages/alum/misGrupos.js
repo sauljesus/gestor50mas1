@@ -110,16 +110,16 @@ const StudentGroups = ({ page, page2 }) => {
         return cadena;
       }
       
-      const generarCadenaCompuesta = (boleta, codigo_taller) =>  {
+      const generarCadenaCompuesta = ({bolet, codigo_taller}) =>  {
         const añoActual = new Date().getFullYear();
         const codigoAleatorio = generarCadenaAlfanumerica(5);
         const folioCertificado = añoActual+codigoAleatorio;
         const update = {
             folioCertificado: folioCertificado,
-            boleta: boleta,
+            boleta: bolet,
             codigo_taller: codigo_taller,
           };
-
+          console.log(update);
         axios.post(`${getdireccion()}/requestc/`+folioCertificado)
         .then(response => {
             setDatataller(response.data);
@@ -176,7 +176,7 @@ const StudentGroups = ({ page, page2 }) => {
                                         <td>{calificacion.calificacion}</td> 
                                         <td>{calificacion.estado}</td>
                                         {calificacion.estado == "Aprobada" ? (
-                                            <td><Alert.Link variant="primary" onClick={() => { generarCadenaCompuesta(calificacion.boleta, calificacion.codigo_taller) }}>Solicitar Constancia</Alert.Link></td>
+                                            <td><Alert.Link variant="primary" onClick={() => { generarCadenaCompuesta({bolet: calificacion.boleta, codigo_taller:calificacion.codigo_taller}) }}>Solicitar Constancia</Alert.Link></td>
 
                                         ) : (
                                             <td><Alert.Link variant="primary"></Alert.Link></td>
