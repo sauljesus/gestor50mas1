@@ -11,7 +11,7 @@ import { getdireccion } from '../../helpers/direccion';
 
 const StudentGroups = ({ page, page2 }) => {
     const correo = "";
-    const boleta = "";
+    let boleta = "";
     let navigate = useNavigate();
     const [data, setData] = useState([]);
     const [datataller, setDatataller] = useState([]);
@@ -37,7 +37,7 @@ const StudentGroups = ({ page, page2 }) => {
                 boleta = data.boleta;
                 console.log(boleta);
                 fetchData();
-                Asociar();
+                // Asociar();
             }catch(err){
                 setMessage("Por favor inicia sesión");
                 setShowNotification(true);
@@ -50,22 +50,22 @@ const StudentGroups = ({ page, page2 }) => {
         cargarUsuario();
     }, []);
     const fetchData = () => {
-        axios.get(`${getdireccion()}/studentcert/${boleta}`)
+        axios.get(`${getdireccion()}/talleresAlumno/talleresInscrito/${boleta}`)
         
             .then(response => {
-                setData(response.data);
+                setCalificaciones(response.data);
             })
             .catch(error => {
                 console.error(error);
             });
 
-            axios.get(`${getdireccion()}/talleres`)
-            .then(response => {
-                setDatataller(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
+            // axios.get(`${getdireccion()}/talleres`)
+            // .then(response => {
+            //     setDatataller(response.data);
+            // })
+            // .catch(error => {
+            //     console.error(error);
+            // });
             
     };
 
@@ -94,7 +94,7 @@ const StudentGroups = ({ page, page2 }) => {
       }
     
     const gotoGroup = (codigo_taller, taller) => {
-      navigate("/grupo", { state: {taller: codigo_taller, nombre_taller: taller}});
+      navigate("http://localhos:5000/grupo", { state: {taller: codigo_taller, nombre_taller: taller}});
     }
 
 
@@ -120,7 +120,7 @@ const StudentGroups = ({ page, page2 }) => {
             codigo_taller: codigo_taller,
           };
 
-        axios.post(`/requestc/`+folioCertificado)
+        axios.post(`${getdireccion()}/requestc/`+folioCertificado)
         .then(response => {
             setDatataller(response.data);
         })
@@ -171,7 +171,7 @@ const StudentGroups = ({ page, page2 }) => {
                                 {grades.map(calificacion => (
                                     <tr key={calificacion.codigo_taller}>
                                         <td>{calificacion.codigo_taller}</td>
-                                        <td>{calificacion.taller}</td>
+                                        <td>{calificacion.nombre}</td>
                                         <td>{calificacion.periodo}</td>
                                         <td>{calificacion.calificacion}</td> 
                                         <td>{calificacion.estado}</td>

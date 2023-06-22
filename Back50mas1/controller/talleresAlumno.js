@@ -27,7 +27,7 @@ const setCalificaciones = async (req, res) => {
 
 const getTalleresInscrito = async (req, res) => {
     try {
-        const response = await db.query(`SELECT A.codigo_taller, A.nombre, B.estado, B.calificacion FROM talleres A, talleres_alumno B WHERE A.codigo_taller = B.codigo_taller AND boleta = '${req.params.boleta}';`, { type: QueryTypes.SELECT });
+        const response = await db.query(`SELECT A.codigo_taller, A.nombre, B.estado, B.calificacion, A.periodo FROM talleres A, talleres_alumno B WHERE A.codigo_taller = B.codigo_taller AND boleta = '${req.params.boleta}';`, { type: QueryTypes.SELECT });
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({ msg: error.message });
