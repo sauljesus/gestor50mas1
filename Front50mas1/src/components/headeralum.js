@@ -14,7 +14,7 @@ function Header({page, page2, alumno}) {
             <div className="route">
                 <div className="route-text-up">
                     <div className="route-icon">
-                        <AiFillHome/>
+                        {/* <AiFillHome/> */}
                     </div>
                         / {page}
                 </div>
@@ -22,12 +22,12 @@ function Header({page, page2, alumno}) {
             </div>
             <div className="corner-icons">
                 <div className="route-icons">
-                    <FaUserCircle/>
+                    {/* <FaUserCircle/> */}
                 </div>
             </div>
             <div className="corner-icons">
                 <div className="route-icons">
-                    <BsGearFill/>
+                    {/* <BsGearFill/> */}
                 </div>
                 <div className="route-icons">
                     <button style={{border:'none'}} onClick={logOut} title='Cerrar Sesión'><FaSignOutAlt/></button>

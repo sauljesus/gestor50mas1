@@ -1,14 +1,18 @@
 import React from 'react';
 import {AiFillHome} from 'react-icons/ai';
-import {FaUserCircle} from 'react-icons/fa';
+import {FaUserCircle, FaSignOutAlt} from 'react-icons/fa';
 import {BsGearFill, BsFillBellFill} from 'react-icons/bs';
 import '../styles/navbar.css';
 
 function Header({page, page2}) {
+    const logOut = () =>{
+        localStorage.removeItem('jwt');
+        window.location.replace('/login');
+    }
 	return (
         <div className="header">
             <div className="route">
-                <div className="route-text-up">
+                <div className="route-text-up"> 
                     <div className="route-icon">
                         <AiFillHome/>
                     </div>
@@ -18,15 +22,15 @@ function Header({page, page2}) {
             </div>
             <div className="corner-icons">
                 <div className="route-icons">
-                    <FaUserCircle/>
+                    {/* <FaUserCircle/> */}
                 </div>
             </div>
             <div className="corner-icons">
                 <div className="route-icons">
-                    <BsGearFill/>
+                    {/* <BsGearFill/> */}
                 </div>
                 <div className="route-icons">
-                    <BsFillBellFill/>
+                    <button style={{border:'none'}} onClick={logOut} title='Cerrar Sesión'><FaSignOutAlt/></button>
                 </div>
             </div>
         </div>

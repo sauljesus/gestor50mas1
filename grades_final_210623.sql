@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-06-2023 a las 04:17:45
+-- Tiempo de generación: 22-06-2023 a las 06:36:13
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -43,7 +43,7 @@ CREATE TABLE `alumno` (
   `CP` int(6) NOT NULL,
   `telefono` int(13) NOT NULL,
   `celular` int(13) NOT NULL,
-  `correo` varchar(100) NOT NULL,
+  `correo` varchar(30) NOT NULL,
   `password` varchar(150) NOT NULL,
   `edad` int(3) NOT NULL,
   `nivelAcademico` varchar(30) NOT NULL,
@@ -59,6 +59,11 @@ CREATE TABLE `alumno` (
   `updatedAt` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `alumno`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -70,6 +75,12 @@ CREATE TABLE `certificado` (
   `estado` enum('Generado','Pendiente') DEFAULT NULL,
   `fechaExpedicion` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `certificado`
+--
+
+
 
 -- --------------------------------------------------------
 
@@ -94,11 +105,15 @@ CREATE TABLE `ceusuario` (
 
 CREATE TABLE `talleres` (
   `codigo_taller` varchar(11) NOT NULL,
-  `correo` varchar(30) DEFAULT NULL,
-  `nombre` varchar(30) NOT NULL,
+  `correo` varchar(50) DEFAULT NULL,
+  `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
   `periodo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `talleres`
+--
 
 -- --------------------------------------------------------
 
@@ -109,12 +124,16 @@ CREATE TABLE `talleres` (
 CREATE TABLE `talleres_alumno` (
   `boleta` int(10) NOT NULL,
   `codigo_taller` varchar(11) NOT NULL,
-  `correo` varchar(30) NOT NULL,
   `calificacion` int(3) DEFAULT NULL,
   `estado` enum('Aprobada','Reprobada') DEFAULT NULL,
-  `certificado` varchar(15) NOT NULL,
+  `certificado` varchar(15) DEFAULT NULL,
   `folioCertificado` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `talleres_alumno`
+--
+
 
 -- --------------------------------------------------------
 
@@ -130,9 +149,16 @@ CREATE TABLE `usuarios` (
   `password` varchar(150) NOT NULL,
   `tipoUsuario` enum('Profesor','Administrador') NOT NULL,
   `status` enum('Activo','Inactivo') NOT NULL,
-  `inicioLaboral` datetime NOT NULL DEFAULT current_timestamp(),
+  `inicioLaboral` datetime DEFAULT current_timestamp(),
   `finLaboral` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`nombre`, `apellidoPaterno`, `apellidoMaterno`, `correo`, `password`, `tipoUsuario`, `status`, `inicioLaboral`, `finLaboral`) VALUES
+('Admin', 'Admin', 'Admon', 'Admin.admin@admin.com', '$2b$10$bdG11SlW1FpqQlFLZidcKuJaSsbA1W1lmcTbXVPno4fcj91Ja/ZZ6', 'Administrador', 'Activo', '0000-00-00 00:00:00', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -168,9 +194,9 @@ ALTER TABLE `talleres`
 -- Indices de la tabla `talleres_alumno`
 --
 ALTER TABLE `talleres_alumno`
+  ADD PRIMARY KEY (`boleta`,`codigo_taller`),
   ADD KEY `codigo_taller` (`codigo_taller`),
-  ADD KEY `correo` (`correo`),
-  ADD KEY `boleta` (`boleta`,`codigo_taller`,`correo`,`folioCertificado`) USING BTREE,
+  ADD KEY `boleta` (`boleta`,`codigo_taller`,`folioCertificado`) USING BTREE,
   ADD KEY `folioCertificado` (`folioCertificado`);
 
 --
@@ -190,12 +216,17 @@ ALTER TABLE `ceusuario`
   ADD CONSTRAINT `ceusuario_ibfk_1` FOREIGN KEY (`boleta`) REFERENCES `alumno` (`boleta`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `talleres`
+--
+ALTER TABLE `talleres`
+  ADD CONSTRAINT `FK_talleres_usuarios` FOREIGN KEY (`correo`) REFERENCES `usuarios` (`correo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `talleres_alumno`
 --
 ALTER TABLE `talleres_alumno`
   ADD CONSTRAINT `talleres_alumno_ibfk_1` FOREIGN KEY (`codigo_taller`) REFERENCES `talleres` (`codigo_taller`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `talleres_alumno_ibfk_2` FOREIGN KEY (`boleta`) REFERENCES `alumno` (`boleta`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `talleres_alumno_ibfk_3` FOREIGN KEY (`correo`) REFERENCES `usuarios` (`correo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `talleres_alumno_ibfk_4` FOREIGN KEY (`folioCertificado`) REFERENCES `certificado` (`folioCertificado`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

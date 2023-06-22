@@ -8,15 +8,51 @@ import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 import { getdireccion } from '../helpers/direccion';
 //${getdireccion()}
+// profesor 
 
 
 const MisGrupos = ({ page, page2 }) => {
     const correo = "Profesor.test@gmail.com";
     let navigate = useNavigate();
     const [data, setData] = useState([]);
+    const [message, setMessage] = useState("");
+    const [cargarUsuario,setcargarUsuario] = useState(true);
+    const [showNotification, setShowNotification] = useState(false);
 
     useEffect(() => {
-        fetchData();
+        async function cargarUsuario(){
+            console.log("token "+ localStorage.getItem('jwt'));
+            if(!(localStorage.getItem('jwt'))){
+                setcargarUsuario(false);
+                setMessage("Por favor inicia sesión");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/login`);
+                  }, 3000);
+                return;
+            }
+            try {
+                const  {data}  = await axios.get(`${getdireccion()}/checkJwtUser`,{headers:{'Authorization':localStorage.getItem('jwt')}});
+                if(data.tipoUsuario == 'Administrador'){
+                    setMessage("No tiene premiso para ver esta pagina");
+                    setShowNotification(true);
+                    setTimeout(() => {
+                        window.location.replace(`/estadisticas`);
+                    }, 3000);
+                }else{
+                    fetchData();
+                    return;
+                }
+            }catch(err){
+                setMessage("Por favor inicia sesión");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/login`);
+                  }, 3000);
+                console.log(err);
+            }
+        }
+        cargarUsuario();
     }, []);
 
     const fetchData = () => {
@@ -36,6 +72,11 @@ const MisGrupos = ({ page, page2 }) => {
 
     return (
         <>
+        {showNotification && (
+                <div className="notification" style={{color:"#ffffff"}}>
+                {message}
+                </div>
+            )}
             <Navbar page={page} page2={page2} />
             <div className='s-body_index'>
                 <div className="main-container">

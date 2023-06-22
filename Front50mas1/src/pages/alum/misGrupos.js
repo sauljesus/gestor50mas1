@@ -16,13 +16,36 @@ const StudentGroups = ({ page, page2 }) => {
     const [data, setData] = useState([]);
     const [datataller, setDatataller] = useState([]);
     const [grades, setCalificaciones] = useState([]);
-
+    const [cargarUsuario,setcargarUsuario] = useState(true);
+    const [showNotification, setShowNotification] = useState(false);
+    const [message, setMessage] = useState("");
     useEffect(() => {
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        Asociar();
+        async function cargarUsuario(){
+            console.log("token "+ localStorage.getItem('jwt'));
+            if(!(localStorage.getItem('jwt'))){
+                setcargarUsuario(false);
+                setMessage("Por favor inicia sesión");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/`);
+                  }, 3000);
+                return;
+            }
+            try {
+                const  {data}  = await axios.get(`${getdireccion()}/checkJwt`,{headers:{'Authorization':localStorage.getItem('jwt')}});
+                console.log(data);
+                fetchData();
+                Asociar();
+            }catch(err){
+                setMessage("Por favor inicia sesión");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/`);
+                  }, 3000);
+                console.log(err);
+            }
+        }
+        cargarUsuario();
     }, []);
     const fetchData = () => {
         axios.get(`${getdireccion()}/studentcert/${boleta}`)
@@ -117,6 +140,11 @@ const StudentGroups = ({ page, page2 }) => {
 
     return (
         <>
+         {showNotification && (
+                <div className="notification" style={{color:"#ffffff"}}>
+                {message}
+                </div>
+            )}
             <Alum page={page} page2={page2} />
             <div className='s-body_index'>
                 <div className="main-container">

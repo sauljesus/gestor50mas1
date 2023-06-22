@@ -27,17 +27,42 @@ const Statisticsalum = ({ page}) => {
   const { boleta } = useParams();
   const [datos, setDatos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [cargarUsuario,setcargarUsuario] = useState(true);
+  const [showNotification, setShowNotification] = useState(false);
+  const [message, setMessage] = useState("");
   const { state } = location;
   const boletatest = "2023060033";
 
 
-    useEffect(
-        () => {
-        console.log(boletatest);
-        }, [location]
-        
+    useEffect(() => {
+        async function cargarUsuario(){
+            console.log("token "+ localStorage.getItem('jwt'));
+            if(!(localStorage.getItem('jwt'))){
+                setcargarUsuario(false);
+                setMessage("Por favor inicia sesión");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/`);
+                  }, 3000);
+                return;
+            }
+            try {
+                const  {data}  = await axios.get(`${getdireccion()}/checkJwt`,{headers:{'Authorization':localStorage.getItem('jwt')}});
+                console.log(data);
+                fetchData();
+            }catch(err){
+                setMessage("Por favor inicia sesión");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/`);
+                  }, 3000);
+                console.log(err);
 
-      );
+            }
+        }
+        cargarUsuario();
+
+    },[]);
     
 
 
@@ -175,11 +200,6 @@ const Statisticsalum = ({ page}) => {
             }
         }
     };
-
-    useEffect(() => {
-            fetchData();
-    }, []);
-
     const fetchData = () => {
 
         axios.get(`http://localhost:5000/estadistica6/`+boletatest)
@@ -263,6 +283,11 @@ const Statisticsalum = ({ page}) => {
 
     return (
         <>
+        {showNotification && (
+                <div className="notification" style={{color:"#ffffff"}}>
+                {message}
+                </div>
+            )}
             <Alum page={page} datos={datos}/>
             <div className='body_index'>
                 <div className="main-container">

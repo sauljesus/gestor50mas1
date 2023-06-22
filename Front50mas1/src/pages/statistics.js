@@ -12,6 +12,47 @@ import { getdireccion } from '../helpers/direccion';
 
 
 const Statistics = ({ page }) => {
+    const [cargarUsuario,setcargarUsuario] = useState(true);
+    const [showNotification, setShowNotification] = useState(false);
+    const [message, setMessage] = useState("");
+    useEffect(() => {
+        async function cargarUsuario(){
+            console.log("token "+ localStorage.getItem('jwt'));
+            if(!(localStorage.getItem('jwt'))){
+                setcargarUsuario(false);
+                setMessage("Por favor inicia sesión");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/login`);
+                  }, 3000);
+                return;
+            }
+            try {
+                const  {data}  = await axios.get(`${getdireccion()}/checkJwtUser`,{headers:{'Authorization':localStorage.getItem('jwt')}});
+                if(data.tipoUsuario == 'Profesor'){
+                    setMessage("No tiene premiso para ver esta pagina");
+                    setShowNotification(true);
+                    setTimeout(() => {
+                        window.location.replace(`/mis-grupos`);
+                    }, 3000);
+                }else{
+                    fetchData();
+                    return;
+                }
+            }catch(err){
+                setMessage("Por favor inicia sesión");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/login`);
+                  }, 3000);
+                console.log(err);
+            }
+        }
+        cargarUsuario();
+    }, []);
+
+
+
     const [calificaciones, setCalificaciones] = useState([]);
     var opcioneEstadisticaCalificaciones = {
         responsive: true,
@@ -150,9 +191,7 @@ const Statistics = ({ page }) => {
     };
 
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    
 
     const fetchData = () => {
         axios.get(`${getdireccion()}/estadistica1`)
@@ -221,6 +260,11 @@ const Statistics = ({ page }) => {
 
     return (
         <>
+        {showNotification && (
+            <div className="notification" style={{color:"#ffffff"}}>
+            {message}
+            </div>
+        )}
             <Navbar page={page} />
             <div className='body_index'>
                 <div className="main-container">

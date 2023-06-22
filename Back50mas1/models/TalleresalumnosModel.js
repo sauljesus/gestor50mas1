@@ -19,15 +19,7 @@ const Talumno = db.define('talleres_alumno',{
             notEmpty: true,
             len: [1, 11]
         }
-    }, 
-    correo:{
-        type: DataTypes.STRING,
-        allowNull: true,
-        validate:{
-            notEmpty: false,
-            isEmail: true
-        }
-    }, 
+    },  
     calificacion:{
         type: DataTypes.INTEGER,
         primaryKey: true,

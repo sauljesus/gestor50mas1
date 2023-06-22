@@ -11,5 +11,6 @@ router.get('/usuarios', usuarioController.getUsers);
 router.get('/usuario/:correo', usuarioController.getUserByCorreo);
 
 router.put('/profesoredit/:correo',usuarioController.updateProfesoredit);
+router.post('/newProf',usuarioController.createUserP);
 
 module.exports = router;

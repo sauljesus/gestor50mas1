@@ -20,14 +20,37 @@ const Signup =({page})=> {
   const [searchText, setSearchText] = useState('');
   const page2 = "Perfil";
   const pagee = "Dashboard";
+  const [cargarUsuario,setcargarUsuario] = useState(true);
+  const [showNotification, setShowNotification] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const jwt = window.localStorage.getItem('token');
-    const correo= window.localStorage.getItem('correo');
-    fetchTalleres();
+    async function cargarUsuario(){
+      console.log("token "+ localStorage.getItem('jwt'));
+      if(!(localStorage.getItem('jwt'))){
+          setcargarUsuario(false);
+          setMessage("Por favor inicia sesión");
+          setShowNotification(true);
+          setTimeout(() => {
+              window.location.replace(`/`);
+            }, 3000);
+          return;
+      }
+      try {
+          const  {data}  = await axios.get(`${getdireccion()}/checkJwt`,{headers:{'Authorization':localStorage.getItem('jwt')}});
+          console.log(data);
+          fetchTalleres();
+      }catch(err){
+          setMessage("Por favor inicia sesión");
+          setShowNotification(true);
+          setTimeout(() => {
+              window.location.replace(`/`);
+            }, 3000);
+          console.log(err);
+      }
+  }
+  cargarUsuario();
   }, []);
-
-
   const fetchTalleres = () => {
     axios.get(`${getdireccion()}/talleres`)
       .then(responset => {
@@ -51,6 +74,11 @@ const Signup =({page})=> {
 
   return (
     <>
+    {showNotification && (
+                <div className="notification" style={{color:"#ffffff"}}>
+                {message}
+                </div>
+            )}
       <Alum page={page} /> 
       <div className='s-body_index'>
         <div className="main-container">

@@ -56,7 +56,7 @@ const Users = db.define('usuarios',{
     },
     inicioLaboral: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
       },
       finLaboral: {
         type: DataTypes.DATE,

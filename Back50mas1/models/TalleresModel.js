@@ -23,7 +23,7 @@ const Talleres = db.define('talleres',{
         allowNull: false,
         validate:{
             notEmpty: true,
-            len: [3, 30]
+            len: [3, 50]
         }
     },
     descripcion:{

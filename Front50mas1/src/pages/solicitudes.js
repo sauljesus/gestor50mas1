@@ -13,15 +13,54 @@ import { getdireccion } from '../helpers/direccion';
 
 function Solicitudes({ page }) {
   const [certificados, setCertificados] = useState([]);
+  const [cargarUsuario,setcargarUsuario] = useState(true);
+    const [showNotification, setShowNotification] = useState(false);
+    const [message, setMessage] = useState("");
+  useEffect(() => {
+    async function cargarUsuario(){
+      console.log("token "+ localStorage.getItem('jwt'));
+      if(!(localStorage.getItem('jwt'))){
+          setcargarUsuario(false);
+          setMessage("Por favor inicia sesión");
+          setShowNotification(true);
+          setTimeout(() => {
+              window.location.replace(`/login`);
+            }, 3000);
+          return;
+      }
+      try {
+          const  {data}  = await axios.get(`${getdireccion()}/checkJwtUser`,{headers:{'Authorization':localStorage.getItem('jwt')}});
+          if(data.tipoUsuario == 'Profesor'){
+              setMessage("No tiene premiso para ver esta pagina");
+              setShowNotification(true);
+              setTimeout(() => {
+                  window.location.replace(`/mis-grupos`);
+              }, 3000);
+          }else{
+            fetchCertificados();
+              return;
+          }
+      }catch(err){
+          setMessage("Por favor inicia sesión");
+          setShowNotification(true);
+          setTimeout(() => {
+              window.location.replace(`/login`);
+            }, 3000);
+          console.log(err);
+      }
+  }
+  cargarUsuario();
+
+   
+  }, []);
+
 
   let navigate = useNavigate();
   const gotoPDF = (data) => {
     navigate("/pdf", { state: {folio: data}});
   }
 
-  useEffect(() => {
-    fetchCertificados();
-  }, []);
+  
 
   const fetchCertificados = () => {
     axios.get(`${getdireccion()}/certificados`)
@@ -35,6 +74,11 @@ function Solicitudes({ page }) {
 
   return (
     <>
+    {showNotification && (
+            <div className="notification" style={{color:"#ffffff"}}>
+            {message}
+            </div>
+        )}
       <Navbar page={page} />
       <div className='s-body_index'>
         <div className="main-container">

@@ -2,9 +2,11 @@ const Talleres = require('../models/TalleresModel');
 const argon2 = require('argon2');
 const { QueryTypes } = require('sequelize');
 const db = require('../config/Database');
+const { generarCodigoTaller } = require('../helpers/generarCodigoTaller');
 
 const getTestM = async  (req,  res) => {
-    res.status(200).json({  msg:  'Test Talleres'  });
+    var boleta =await generarCodigoTaller();
+    res.status(200).json({msg:boleta})
 }
 
 
@@ -21,17 +23,15 @@ const getTalleres = async (req, res) => {
 
 
 const createtaller = async (req, res) => {
-    const { codigo_taller, nombre, descripcion, periodo } = req.body;
-    console.log(req.body);
+    const { correo, nombre, descripcion, periodo } = req.body;
+    const codigo_taller  = await generarCodigoTaller();
     try {
         await Talleres.create({
             codigo_taller: codigo_taller,
-            codigo_taller: codigo_taller,
+            correo : correo,
             nombre: nombre,
             descripcion: descripcion,
-            periodo: periodo,
-            descripcion: descripcion,
-            periodo: periodo,
+            periodo: periodo
         });
         res.status(200).json({ msg: "Taller Creado exitosamente" });
     } catch (error) {

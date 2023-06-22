@@ -42,10 +42,10 @@ function Navbar({visible, show, page}) {
                     />
                     </NavLink>
                     <div className="links nav-top">
-                        <Link to="/home" className={page==="Dashboard" ? "nav-link-selected" : "nav-link" }>
+                        {/* <Link to="/home" className={page==="Dashboard" ? "nav-link-selected" : "nav-link" }>
                             <div className='icones shadow-box'> <AiFillHome/></div> 
                             <span>Inicio</span>
-                        </Link>
+                        </Link> */}
                         <Link to="/consultas" className={page==="Consultas" ? "nav-link-selected" : "nav-link" }>
                             <div className='icones shadow-box'> <BiSearchAlt/></div> 
                             <span>Consulta</span>
