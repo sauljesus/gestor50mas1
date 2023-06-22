@@ -10,6 +10,7 @@ const { check } = require('express-validator');
 const Users = require('../models/usuariosModel');
 const bcrypt = require('bcrypt');
 const { generarBoleta} = require('../helpers/generarBoleta');
+const { generarCodigoTaller } = require('../helpers/generarCodigoTaller');
 const fs = require('fs');
 let jsonDatasave;
 let jsonDatasaveu;
@@ -92,7 +93,7 @@ const uploadFile = (req, res) => {
             jsonDatasavecursos = talleres[c];
             try{
               await Course.create({
-                codigo_taller: jsonDatasavecursos.codigo_taller,
+                codigo_taller: await generarCodigoTaller(),
                 nombre: jsonDatasavecursos.nombre,
                 descripcion: jsonDatasavecursos.descripcion, 
                 periodo: jsonDatasavecursos.periodo,
