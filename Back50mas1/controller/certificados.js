@@ -44,9 +44,26 @@ var today = new Date();
     }
 };
 
+
+const updateCert = async(req ,res) => {
+    try{
+        await Certificado.update({
+            estado: 'Generado',
+        },{
+            where:{
+                folioCertificado:req.params.folioCertificado,
+            }
+        });
+        res.status(200).json({msg: "Certificado Generado"});
+    } catch(error){
+        res.status(400).json({msg: error.message});
+    }
+}
+
  module.exports = {
     getTest,
     getCertificados,
     getCertificadoByCodigo,
-    posrCertificado
+    posrCertificado,
+    updateCert
 };

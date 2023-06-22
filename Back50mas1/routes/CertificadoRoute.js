@@ -8,5 +8,7 @@ router.get('/certificado/:codigoCertificado', certificadoController.getCertifica
 
 router.post('/requestc/:folioCertificado',certificadoController.posrCertificado);
 
+router.put('/certstatus/:folioCertificado',certificadoController.updateCert);
+
 
 module.exports = router;

@@ -8,16 +8,31 @@ import Header from '../components/header';
 import IMG from "../images/descarga.png";
 import Alert from 'react-bootstrap/Alert';
 import { getdireccion } from '../helpers/direccion';
+
 //${getdireccion()}
 
 
 function Solicitudes({ page }) {
   const [certificados, setCertificados] = useState([]);
+  const [data, setData] = useState([]);
 
   let navigate = useNavigate();
+
   const gotoPDF = (data) => {
+    axios.put(`${getdireccion()}/certstatus/${data}`)
+    .then(response => {
+        setData(response.data);
+    })
+    .catch(error => {
+        console.error(error);
+    });
     navigate("/pdf", { state: {folio: data}});
   }
+
+  const actualizarEstado = (data) => {
+   
+  }
+
 
   useEffect(() => {
     fetchCertificados();
