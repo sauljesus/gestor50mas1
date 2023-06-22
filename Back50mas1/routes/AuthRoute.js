@@ -2,7 +2,7 @@ const {Router} = require('express');
 const router = Router();
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validarcampos');
-const { LoginAlumno,LoginUser,LogOut,validarSesion} = require('../controller/Auth');
+const { LoginAlumno,LoginUser,LogOut,validarSesionAlu,validarSesionUser} = require('../controller/Auth');
 const { validartoken } = require('../middlewares/validarJWT');
 
 router.post('/loginAlumno',[
@@ -16,7 +16,8 @@ router.post('/loginUser',[
     check('password','El password es obligatoria').not().isEmpty(),
     validarCampos
 ], LoginUser);
- router.get('/checkJwt',validarSesion)
+ router.get('/checkJwt',validarSesionAlu)
+ router.get('/checkJwtUser',validarSesionUser)
 
 
 module.exports = router;

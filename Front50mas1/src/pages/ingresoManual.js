@@ -27,7 +27,41 @@ const IngresoManual = ({ page }) => {
         descripcion: '',
         periodo: year+'-'+(year+1)
       });
-
+      const [cargarUsuario,setcargarUsuario] = useState(true);
+    useEffect(() => {
+        async function cargarUsuario(){
+            console.log("token "+ localStorage.getItem('jwt'));
+            if(!(localStorage.getItem('jwt'))){
+                setcargarUsuario(false);
+                setMessage("Por favor inicia sesión");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/login`);
+                  }, 3000);
+                return;
+            }
+            try {
+                const  {data}  = await axios.get(`${getdireccion()}/checkJwtUser`,{headers:{'Authorization':localStorage.getItem('jwt')}});
+                if(data.tipoUsuario == 'Profesor'){
+                    setMessage("No tiene premiso para ver esta pagina");
+                    setShowNotification(true);
+                    setTimeout(() => {
+                        window.location.replace(`/home`);
+                    }, 3000);
+                }else{
+                    return;
+                }
+            }catch(err){
+                setMessage("Por favor inicia sesión");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/login`);
+                  }, 3000);
+                console.log(err);
+            }
+        }
+        cargarUsuario();
+    },[])
     const { boleta } = useParams();
     const [showNotification, setShowNotification] = useState(false);
 
@@ -107,7 +141,7 @@ const IngresoManual = ({ page }) => {
     /***********************************************
     ****Funciones para form alumno  inicio *********  
     ***********************************************/
-    const crearUsuario= (e) =>{
+    const crearAlumno= (e) =>{
         e.preventDefault();
         const user = {
             'nombre': `${e.target.elements.txtNombre.value}` ,
@@ -140,19 +174,20 @@ const IngresoManual = ({ page }) => {
         };
         console.log(user);
         axios.post(`${getdireccion()}/alumno`,user).then((res)=>{
-          console.log(res.data.errors[0].msg);
           setMessage(res.data.msg);
           setShowNotification(true);
           setTimeout(() => {
               setShowNotification(false);
+              window.location.reload();
             }, 5000);
-          alert();
+          //alert();
         }).catch((err)=>{
-            var mensaje = ""
-            for (var i = 0;i<err.response.data.errors.length;i++){
-                console.log(err.response.data.errors[i].msg);
-                mensaje += `${err.response.data.errors[i].msg}`;
-            }
+            console.log(err);
+            var mensaje = "Hay uno o mas campos vacios"
+            // for (var i = 0;i<err.response.data.errors.length;i++){
+            //     console.log(err.response.data.errors[i].msg);
+            //     mensaje += `${err.response.data.errors[i].msg}`;
+            // }
             console.log(mensaje);
             setMessage(mensaje);
             setShowNotification(true);
@@ -184,15 +219,91 @@ const IngresoManual = ({ page }) => {
     /***********************************************
     ****Funciones para form alumno  fin    *********  
     ***********************************************/
-
+    /***********************************************
+    ****Funciones para form profesor  inicio *********  
+    ***********************************************/
+    const crearUsuario= (e) =>{
+        e.preventDefault();
+        const user = {
+            'nombre': `${e.target.elements.txtnombreU.value}` ,
+            'apellidoPaterno': `${e.target.elements.txtapPaternoU.value}` ,
+            'apellidoMaterno': `${e.target.elements.txtapMaternoU.value}`,
+            'correo':`${e.target.elements.txtEmailU.value}`,
+            'password': `${e.target.elements.txtpassU.value}`,
+            'confpassword': `${e.target.elements.txtconfpassU.value}`
+        };
+        console.log(user);
+        axios.post(`${getdireccion()}/newProf`,user).then((res)=>{
+          setMessage(res.data.msg);
+          setShowNotification(true);
+          setTimeout(() => {
+              setShowNotification(false);
+              window.location.reload();
+            }, 5000);
+        }).catch((err)=>{
+            var mensaje = "Hubo un error"
+            // for (var i = 0;i<err.response.data.errors.length;i++){
+            //     console.log(err.response.data.errors[i].msg);
+            //     mensaje += `${err.response.data.errors[i].msg}`;
+            // }
+            console.log(mensaje);
+            setMessage(mensaje);
+            setShowNotification(true);
+            setTimeout(() => {
+                setShowNotification(false);
+              }, 5000);
+        })
+    };
+    /***********************************************
+    ****Funciones para form profesor fin    *********  
+    ***********************************************/
+   /***********************************************
+    ****Funciones para form taller  inicio *********  
+    ***********************************************/
+    const crearTaller= (e) =>{
+        e.preventDefault();
+        const taller = {
+            'correo': `${e.target.elements.txtcorreoTaller.value}` ,
+            'nombre': `${e.target.elements.txtnombreTaller.value}`,
+            'descripcion':`${e.target.elements.txtdescripcionTaller.value}`,
+            'periodo': `${e.target.elements.txtperiodoTaller.value}`
+        };
+        console.log(taller);
+        axios.post(`${getdireccion()}/tallercreate`,taller).then((res)=>{
+          //console.log(res.data.errors[0].msg);
+          setMessage(res.data.msg);
+          setShowNotification(true);
+          setTimeout(() => {
+              setShowNotification(false);
+              window.location.reload();
+            }, 5000);
+          //alert();
+        }).catch((err)=>{
+            var mensaje = "Hubo un error"
+            // for (var i = 0;i<err.response.data.errors.length;i++){
+            //     console.log(err.response.data.errors[i].msg);
+            //     mensaje += `${err.response.data.errors[i].msg}`;
+            // }
+            console.log(err);
+            //console.log(mensaje);
+            setMessage(mensaje);
+            setShowNotification(true);
+            setTimeout(() => {
+                setShowNotification(false);
+              }, 5000);
+        })
+    };
+    /***********************************************
+    ****Funciones para form taller fin    *********  
+    ***********************************************/
 
     return (
         <> 
-        {showNotification && (
-            <div className="notification">
-              Registro realizado correctamente
-            </div>
-          )}
+         {showNotification && (
+                <div className="notification" style={{color:"#ffffff"}}>
+                {message}
+                </div>
+            )}
             <Navbar page={page}/>
             <div className='s-body_index'>
                 <div className="main-container">
@@ -210,7 +321,7 @@ const IngresoManual = ({ page }) => {
                                     <div className='s-text-head'>Registar alumno</div>
                                 </div>
                                 <div className='f-block'>
-                                  <form className='f-cont-form-reg' onSubmit={crearUsuario} >
+                                  <form className='f-cont-form-reg' onSubmit={crearAlumno} >
                                       <h1 className='f-log-semititu'>Nombre</h1>
                                       <input className='f-log-input' type="text" name="txtNombre" placeholder="Nombre"/>
                                       <h1 className='f-log-semititu'>Apellido Paterno</h1>
@@ -280,13 +391,15 @@ const IngresoManual = ({ page }) => {
                                     <div className='s-text-head'>Registrar taller</div>
                                 </div>
                                 <div className='f-block'>
-                                    <form className='f-cont-form-reg' onSubmit={handleSubmit_taller} >
-                                        <h1 className='f-log-semititu'>Codigo taller</h1>
-                                        <input className='f-log-input' value={taller.codigo_taller} type="text" name="codigo_taller" onChange={handleChange_taller} />
+                                    <form className='f-cont-form-reg' onSubmit={crearTaller} >
+                                        <h1 className='f-log-semititu'>Correo Profesor a cargo</h1>
+                                        <input className='f-log-input' maxLength="50"  type="text" name="txtcorreoTaller"  />
                                         <h1 className='f-log-semititu'>Nombre</h1>
-                                        <input className='f-log-input' value={taller.nombre} type="text" name="nombre"  onChange={handleChange_taller} />
+                                        <input className='f-log-input' maxLength="50" type="text" name="txtnombreTaller"  />
                                         <h1 className='f-log-semititu'>Descripcion</h1>
-                                        <input className='f-log-input'value={taller.descripcion} type="text" name="descripcion"  onChange={handleChange_taller}/>
+                                        <input className='f-log-input'  maxLength="200" type="text" name="txtdescripcionTaller"  />
+                                        <h1 className='f-log-semititu'>Periodo</h1>
+                                        <input className='f-log-input' maxLength="20" type="text" name="txtperiodoTaller" />
                                         <button className='f-log-boton-formi'>Registrar</button>
                                     </form>
                                 </div>
@@ -296,15 +409,19 @@ const IngresoManual = ({ page }) => {
                                     <div className='s-text-head'>Registar profesor</div>
                                 </div>
                                 <div className='f-block'>
-                                    <form className='f-cont-form-reg' >
+                                    <form className='f-cont-form-reg' onSubmit={crearUsuario} >
                                         <h1 className='f-log-semititu'>Nombre(s)</h1>
-                                        <input className='f-log-input' type="text" name="nombre" placeholder="" />
+                                        <input className='f-log-input' maxLength="30" type="text" name="txtnombreU" placeholder="" />
                                         <h1 className='f-log-semititu'>Apellido Paterno</h1>
-                                        <input className='f-log-input' type="text" name="txtEmail" placeholder="" />
+                                        <input className='f-log-input' maxLength="30" type="text" name="txtapPaternoU" placeholder="" />
                                         <h1 className='f-log-semititu'>Apellido Materno</h1>
-                                        <input className='f-log-input' type="text" name="txtEmail" placeholder="" />
+                                        <input className='f-log-input' maxLength="30" type="text" name="txtapMaternoU" placeholder="" />
                                         <h1 className='f-log-semititu'>Email</h1>
-                                        <input className='f-log-input' type="text" name="txtEmail" placeholder="" />
+                                        <input className='f-log-input' maxLength="30" type="text" name="txtEmailU" placeholder="" />
+                                        <h1 className='f-log-semititu'>password</h1>
+                                        <input className='f-log-input' maxLength="30" type="text" name="txtpassU" placeholder="" />
+                                        <h1 className='f-log-semititu'>confirmar password</h1>
+                                        <input className='f-log-input' maxLength="30" type="text" name="txtconfpassU" placeholder="" />
 
                                         <button className='f-log-boton-formi'>Registrar</button>
                                     </form>

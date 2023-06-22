@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/masive.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -7,16 +7,53 @@ import Navbar from '../components/navbar';
 import Header from '../components/header';
 import DndropImage from '../components/Dnd';
 import IMG from "../images/descarga.png";
+import axios from 'axios';
 import { getdireccion } from '../helpers/direccion';
 //${getdireccion()}
 
 const Masive = ({page}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadProgress, setUploadProgress] = useState(0);
+    const [cargarUsuario,setcargarUsuario] = useState(true);
+    const [showNotification, setShowNotification] = useState(false);
+    const [message, setMessage] = useState("");
     let respuesta;
 
     const [hovered, setHovered] = useState(false);
-
+    useEffect(() =>{
+      async function cargarUsuario(){
+        console.log("token "+ localStorage.getItem('jwt'));
+        if(!(localStorage.getItem('jwt'))){
+            setcargarUsuario(false);
+            setMessage("Por favor inicia sesión");
+            setShowNotification(true);
+            setTimeout(() => {
+                window.location.replace(`/login`);
+              }, 3000);
+            return;
+        }
+        try {
+            const  {data}  = await axios.get(`${getdireccion()}/checkJwtUser`,{headers:{'Authorization':localStorage.getItem('jwt')}});
+            if(data.tipoUsuario == 'Profesor'){
+                setMessage("No tiene premiso para ver esta pagina");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/home`);
+                }, 3000);
+            }else{
+                return;
+            }
+        }catch(err){
+            setMessage("Por favor inicia sesión");
+            setShowNotification(true);
+            setTimeout(() => {
+                window.location.replace(`/login`);
+              }, 3000);
+            console.log(err);
+        }
+    }
+    cargarUsuario();
+    },[])
     const handleMouseEnter = () => {
       setHovered(true);
     };
@@ -51,7 +88,11 @@ const Masive = ({page}) => {
   
     return (
         <>
-  
+           {showNotification && (
+                <div className="notification" style={{color:"#ffffff"}}>
+                {message}
+                </div>
+            )}
             <Navbar page={page} />
             <div className='s-body_index'>
                 <div className="main-container">

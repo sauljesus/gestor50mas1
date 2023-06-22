@@ -46,7 +46,8 @@ const Index = ({scrollDown}) => {
 
     const selUsuario= async (e) =>{
         e.preventDefault();
-        const alumno = {"correo":`${e.target.elements.txtEmail.value}`,"password":`${e.target.elements.txtPass.value}`};   
+        const alumno = {"correo":`${e.target.elements.txtEmail.value}`,"password":`${e.target.elements.txtPass.value}`};  
+        console.log(alumno.correo); 
         Axios.post(`${getdireccion()}/loginAlumno`,alumno).then((res)=>{
             const ms = "Login Exitoso";
             setMessage(ms);

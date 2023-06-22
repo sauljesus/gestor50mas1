@@ -24,7 +24,9 @@ function Consulta({ page }) {
   const [showTaller, setShowTaller] = useState(false);
   const [showProfesor, setShowProfesor] = useState(false);
   const [textPage, setTextPage] = useState("Consulta de alumno");
-
+  const [cargarUsuario,setcargarUsuario] = useState(true);
+  const [showNotification, setShowNotification] = useState(false);
+  const [message, setMessage] = useState("");
 
   const setShow = (type) => {
     if (type == "alumno") {
@@ -45,9 +47,41 @@ function Consulta({ page }) {
   }
 
   useEffect(() => {
-    fetchAlumnos();
-    fetchProfesores();
-    fetchTalleres();
+    async function cargarUsuario(){
+      console.log("token "+ localStorage.getItem('jwt'));
+      if(!(localStorage.getItem('jwt'))){
+          setcargarUsuario(false);
+          setMessage("Por favor inicia sesión");
+          setShowNotification(true);
+          setTimeout(() => {
+              window.location.replace(`/login`);
+            }, 3000);
+          return;
+      }
+      try {
+          const  {data}  = await axios.get(`${getdireccion()}/checkJwtUser`,{headers:{'Authorization':localStorage.getItem('jwt')}});
+          if(data.tipoUsuario == 'Profesor'){
+              setMessage("No tiene premiso para ver esta pagina");
+              setShowNotification(true);
+              setTimeout(() => {
+                  window.location.replace(`/mis-grupos`);
+              }, 3000);
+          }else{
+            fetchAlumnos();
+            fetchProfesores();
+            fetchTalleres();
+              return;
+          }
+      }catch(err){
+          setMessage("Por favor inicia sesión");
+          setShowNotification(true);
+          setTimeout(() => {
+              window.location.replace(`/login`);
+            }, 3000);
+          console.log(err);
+      }
+  }
+  cargarUsuario();
   }, []);
 
   const fetchAlumnos = () => {
@@ -107,6 +141,11 @@ function Consulta({ page }) {
 
   return (
     <>
+      {showNotification && (
+                <div className="notification" style={{color:"#ffffff"}}>
+                {message}
+                </div>
+            )}
       <Navbar page={page} />
       <div className='s-body_index'>
         <div className="main-container">

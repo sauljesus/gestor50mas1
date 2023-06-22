@@ -3,12 +3,12 @@ const router = express.Router();
 const talleresController = require('../controller/talleres');
 
 
-
+router.get('/testt',talleresController.getTestM);
 router.get('/talleres', talleresController.getTalleres);
 
 router.get('/misTalleres/:correo', talleresController.getTalleresByCorreo);
 
-router.put('/tallercreate', talleresController.createtaller);
+router.post('/tallercreate', talleresController.createtaller);
 
 router.put('/inscribirtaller', talleresController.createtaller);
 

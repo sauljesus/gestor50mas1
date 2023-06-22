@@ -49,7 +49,8 @@ const LoginUser = async (req, res) =>{
             // const tipoUsuario = user
             const jwt = await generarJWTUsuario(nombre,apellidoPaterno,correo)
             //res.status(200).json({msg: "login Exitoso"});
-            return res.send({jwt, id,tipoUsuario});
+            //return res.send({jwt, id,tipoUsuario});
+            return res.send({'jwt':jwt,'info':{nombre,apellidoPaterno,correo,tipoUsuario}});
         } else{
             res.status(400).json({msg: "Contraseña incorrecta"});
         }
@@ -58,7 +59,7 @@ const LoginUser = async (req, res) =>{
     }
     
 }
-const validarSesion = async(req,res)=>{
+const validarSesionAlu = async(req,res)=>{
     const accessToken = req.headers['authorization'] 
     console.log("sdsd "+accessToken);
         if(!accessToken) res.send('Acceso denegado, por favor inicia Sesión');
@@ -79,8 +80,28 @@ const validarSesion = async(req,res)=>{
             res.status(401).json({msg:'Hubo un error',code:err.code});
         }
 }
+const validarSesionUser = async(req,res)=>{
+    const accessToken = req.headers['authorization'] 
+    console.log("sdsd "+accessToken);
+        if(!accessToken) res.send('Acceso denegado, por favor inicia Sesión');
+        try {
+            const encoder = new TextEncoder();
+            const jwtData = await jose.jwtVerify(accessToken, encoder.encode(process.env.JWT_PRIVATE_KEY));
+            const user =  await Usuario.findOne({ where: { correo: jwtData.payload.correo } }); 
+            console.log(jwtData.payload.correo);
+            if(!(jwtData.payload.correo==user.correo)) {
+                res.status(401).json({msg:'Acceso denegado'});
+            }else{
+                res.status(200).json(user);
+            }
+        }catch(err){
+            console.log(err.code);
+            res.status(401).json({msg:'Hubo un error',code:err.code});
+        }
+}
 module.exports = {
     LoginAlumno,
     LoginUser,
-    validarSesion
+    validarSesionUser,
+    validarSesionAlu
 };

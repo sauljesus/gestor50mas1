@@ -16,11 +16,50 @@ function Inscripciones({ page }) {
   const [showTable, setShowTable] = useState(false);
   const [showAlumno, setShowAlumno] = useState(true);
   const [showTaller, setShowTaller] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
   const [notiMsg, setNotiMsg] = useState("");
   const [status, setStatus] = useState();
   const [sAlumno, setSAlumno] = useState("");
   const [sTaller, setSTaller] = useState("");
+  const [cargarUsuario,setcargarUsuario] = useState(true);
+    const [showNotification, setShowNotification] = useState(false);
+    const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    async function cargarUsuario(){
+        console.log("token "+ localStorage.getItem('jwt'));
+        if(!(localStorage.getItem('jwt'))){
+            setcargarUsuario(false);
+            setNotiMsg("Por favor inicia sesión");
+            setShowNotification(true);
+            setTimeout(() => {
+                window.location.replace(`/login`);
+              }, 3000);
+            return;
+        }
+        try {
+            const  {data}  = await axios.get(`${getdireccion()}/checkJwtUser`,{headers:{'Authorization':localStorage.getItem('jwt')}});
+            if(data.tipoUsuario == 'Profesor'){
+              setNotiMsg("No tiene premiso para ver esta pagina");
+                setShowNotification(true);
+                setTimeout(() => {
+                    window.location.replace(`/mis-grupos`);
+                }, 3000);
+            }else{
+                return;
+            }
+        }catch(err){
+          setNotiMsg("Por favor inicia sesión");
+            setShowNotification(true);
+            setTimeout(() => {
+                window.location.replace(`/login`);
+              }, 3000);
+            console.log(err);
+        }
+    }
+    cargarUsuario();
+}, []);
+
+
 
   const setShow = (type) => {
     setSAlumno("");

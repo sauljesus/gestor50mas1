@@ -107,7 +107,7 @@ function EditTaller({ page }) {
                                 <div className="t-form">
                                     <div className="form-field">
                                         <label htmlFor="nombre">Nombre:</label>
-                                        <input maxlength="30" required type="text" id="name" className='t-cimput' value={talleres.nombre} onChange={(e) => setTalleres({
+                                        <input maxlength="50" required type="text" id="name" className='t-cimput' value={talleres.nombre} onChange={(e) => setTalleres({
                                             ...talleres,
                                             nombre: e.target.value
                                         })} />
