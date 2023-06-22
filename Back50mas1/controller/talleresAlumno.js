@@ -1,6 +1,6 @@
 const { QueryTypes } = require('sequelize');
 const db = require('../config/Database');
-const Talumno = require('../models/TalleresAlumnosModel');
+const Talumno = require('../models/TalleresalumnosModel');
 
 const getMiGrupo = async (req, res) => {
     try {

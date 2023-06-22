@@ -12,7 +12,7 @@ import { getdireccion } from '../helpers/direccion';
 
 
 const MisGrupos = ({ page, page2 }) => {
-    const correo = "Profesor.test@gmail.com";
+    const correo = "";
     let navigate = useNavigate();
     const [data, setData] = useState([]);
     const [message, setMessage] = useState("");
@@ -40,6 +40,8 @@ const MisGrupos = ({ page, page2 }) => {
                         window.location.replace(`/estadisticas`);
                     }, 3000);
                 }else{
+                    correo = data.correo;
+                    console.log(correo);
                     fetchData();
                     return;
                 }

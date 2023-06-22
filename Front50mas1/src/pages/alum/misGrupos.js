@@ -10,8 +10,8 @@ import { getdireccion } from '../../helpers/direccion';
 
 
 const StudentGroups = ({ page, page2 }) => {
-    const correo = "Profesor.test@gmail.com";
-    const boleta = "2023060033";
+    const correo = "";
+    const boleta = "";
     let navigate = useNavigate();
     const [data, setData] = useState([]);
     const [datataller, setDatataller] = useState([]);
@@ -33,7 +33,9 @@ const StudentGroups = ({ page, page2 }) => {
             }
             try {
                 const  {data}  = await axios.get(`${getdireccion()}/checkJwt`,{headers:{'Authorization':localStorage.getItem('jwt')}});
-                console.log(data);
+                //console.log(data);
+                boleta = data.boleta;
+                console.log(boleta);
                 fetchData();
                 Asociar();
             }catch(err){

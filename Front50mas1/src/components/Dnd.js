@@ -4,6 +4,7 @@ import EV from "../images/Excelverde.png";
 import '../styles/masive.css';
 import axios from 'axios';
 import CloseButton from 'react-bootstrap/CloseButton';
+import { getdireccion } from '../helpers/direccion';
 
 const DndropImage = () => {
 
@@ -44,8 +45,9 @@ const DndropImage = () => {
       setShowNotification(true);
     }else{
       setMessage({ message: "Subiendo información..." });
-      setShowNotification(true);
-      axios.post('http://localhost:5000/upload', formData)
+      setShowNotification(true); 
+      console.log(`${getdireccion()}/upload`);
+      axios.post(`${getdireccion()}/upload`, formData)
         .then(response => {
           // console.log(response.data);
           setMessage(response.data);

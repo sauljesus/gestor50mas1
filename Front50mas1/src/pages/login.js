@@ -23,7 +23,7 @@ const Login = () => {
                 setMessage("login existente redirigiendo");
                 setShowNotification(true);
                 setTimeout(() => {
-                    if(data.tipoUsuario=='Profesor')
+                    if(data.tipoUsuario == 'Profesor')
                         window.location.replace(`/mis-grupos`);
                     else
                         window.location.replace('/estadisticas')    
@@ -52,7 +52,11 @@ const Login = () => {
              localStorage.setItem('jwt',res.data.jwt)
              //console.log(res.data.info);
              //console.log(res.data.jwt);
-            window.location.replace(`/estadisticas`);
+             if(res.data.info.tipoUsuario=='Profesor')
+                        window.location.replace(`/mis-grupos`);
+                    else
+                        window.location.replace('/estadisticas')  
+            //window.location.replace(`/estadisticas`);
         }).catch((err)=>{
             setMessage(err.response.data.msg);
             setShowNotification(true);

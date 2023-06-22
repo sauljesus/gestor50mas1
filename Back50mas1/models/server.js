@@ -35,7 +35,7 @@ class Server {
     middlewares(){
         this.app.use(cors({
             credentials: true,
-            origin: 'http://localhost:3000'
+            origin: 'http://ttrcincuentamasuno.eastus.cloudapp.azure.com:3000'
         }));
         this.app.use( express.json() );
     }
