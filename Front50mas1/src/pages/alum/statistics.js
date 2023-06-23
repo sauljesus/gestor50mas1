@@ -24,7 +24,7 @@ const Statisticsalum = ({ page}) => {
   const [token, setToken] = useState();
   const [promedioa, setPromedio] = useState();
   const location = useLocation();
-  const { boleta } = useParams();
+  const [boleta, setBoleta] = useState();
   const [datos, setDatos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [cargarUsuario,setcargarUsuario] = useState(true);
@@ -49,6 +49,7 @@ const Statisticsalum = ({ page}) => {
             try {
                 const  {data}  = await axios.get(`${getdireccion()}/checkJwt`,{headers:{'Authorization':localStorage.getItem('jwt')}});
                 console.log(data);
+                setBoleta(data.boleta);
                 fetchData();
             }catch(err){
                 setMessage("Por favor inicia sesión");
@@ -202,7 +203,7 @@ const Statisticsalum = ({ page}) => {
     };
     const fetchData = () => {
 
-        axios.get(`http://localhost:5000/estadistica6/`+boletatest)
+        axios.get(`http://localhost:5000/estadistica6/`+boleta)
             .then(response => {
                 let data = response.data;
                 let cantPromedio = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -216,7 +217,7 @@ const Statisticsalum = ({ page}) => {
             }
             );
 
-            axios.get(`http://localhost:5000/estadistica7/`+boletatest)
+            axios.get(`http://localhost:5000/estadistica7/`+boleta)
             .then(response => {
                 let data = response.data;
                 let promediod =data[0].promedio_calificaciones;
