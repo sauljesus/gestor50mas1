@@ -10,7 +10,7 @@ import { getdireccion } from '../helpers/direccion';
 
 const Profile = ({ page, page2}) => (
     <>
-        <Navbar page={page} /> 
+        <Navbar page={page} type={"P"}/> 
         <div className='body_index'>
             <div className="main-container">
                 <Header page={page} page2={page2}/>

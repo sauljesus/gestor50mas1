@@ -177,7 +177,7 @@ function Inscripciones({ page }) {
           {notiMsg}
         </div>
       )}
-      <Navbar page={page} />
+      <Navbar page={page} type={"A"}/>
       <div className='s-body_index'>
         <div className="main-container">
           <Header page={page} page2={textPage} />

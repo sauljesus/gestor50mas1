@@ -61,7 +61,7 @@ const Grupo = ({ page, page2 }) => {
 
   return (
     <>
-      <Navbar page={page} page2={page2} />
+      <Navbar page={page} page2={page2} type={"A"}/>
       <div className='s-body_index'>
         <div className="main-container">
           <Header page={page2} page2={page + " " + codigo} />

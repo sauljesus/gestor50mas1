@@ -9,6 +9,7 @@ import DndropImage from '../components/Dnd';
 import IMG from "../images/descarga.png";
 import axios from 'axios';
 import { getdireccion } from '../helpers/direccion';
+import archivo from '../helpers/RegistrosEjemplo.xlsx';
 //${getdireccion()}
 
 const Masive = ({page}) => {
@@ -93,7 +94,7 @@ const Masive = ({page}) => {
                 {message}
                 </div>
             )}
-            <Navbar page={page} />
+            <Navbar page={page} type={"A"}/>
             <div className='s-body_index'>
                 <div className="main-container">
                     <Header page={page} page2={page} />
@@ -111,6 +112,9 @@ const Masive = ({page}) => {
                                 </div>
                             </div>
                            
+                        </div>
+                        <div>
+                          Sube tu archivo con extensión .xlsx, o puedes descargar el archivo de ejemplo <a href={archivo} download="RegistrosEjemplo.xlsx">aquí.</a>
                         </div>
                     </div>
                 </div>

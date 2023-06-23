@@ -33,7 +33,7 @@ const createtaller = async (req, res) => {
             descripcion: descripcion,
             periodo: periodo
         });
-        res.status(200).json({ msg: "Taller Creado exitosamente" });
+        res.status(200).json({ msg: "Taller creado con el código "+codigo_taller });
     } catch (error) {
         res.status(400).json({ msg: error.message });
 }

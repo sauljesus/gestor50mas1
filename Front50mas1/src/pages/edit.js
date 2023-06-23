@@ -61,7 +61,7 @@ function Edit({ page }) {
           Registro actualizado correctamente
         </div>
       )}
-      <Navbar page={page} />
+      <Navbar page={page} type={"A"}/>
       <div className='body_index'>
         <div className="main-container">
           <Header page={page} page2={"Edición"} />

@@ -103,7 +103,7 @@ const createAlumno = async(req ,res) => {
             status:'Activo', 
             tipoUsuario: tipoUsuario
         });
-        res.status(201).json({msg: "Registro Exitoso"});
+        res.status(201).json({msg: "Se registró el alumno con boleta" + boleta});
     } catch(error){
         res.status(400).json({msg: error.message});
     }

@@ -95,7 +95,7 @@ const StudentForm = ({visible, show, page}) => {
                 {message}
                 </div>
             )}
-            <Navbar visible={visible} show={show} page={page} />
+            <Navbar visible={visible} show={show} page={page} type={"A"}/>
             <div className='s-body_index'>
             <div className="main-container">
                 <Header page={page} page2={page}/>

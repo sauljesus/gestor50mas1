@@ -33,7 +33,7 @@ const MisGrupos = ({ page, page2 }) => {
             }
             try {
                 const  {data}  = await axios.get(`${getdireccion()}/checkJwtUser`,{headers:{'Authorization':localStorage.getItem('jwt')}});
-                if(data.tipoUsuario == 'Administrador'){
+                if(data.tipoUsuario == 'A'){
                     setMessage("No tiene premiso para ver esta pagina");
                     setShowNotification(true);
                     setTimeout(() => {
@@ -79,7 +79,7 @@ const MisGrupos = ({ page, page2 }) => {
                 {message}
                 </div>
             )}
-            <Navbar page={page} page2={page2} />
+            <Navbar page={page} page2={page2} tipe={"P"}/>
             <div className='s-body_index'>
                 <div className="main-container">
                     <Header page={page} page2={page} />

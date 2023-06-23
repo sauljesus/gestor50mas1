@@ -13,7 +13,7 @@ import { getdireccion } from '../helpers/direccion';
 
 const Home = ({ page}) => (
     <>
-        <Navbar page={page} /> 
+        {/* <Navbar page={page} /> 
         <div className='body_index'>
             <div className="main-container">
                 <Header page={page} page2={page}/>
@@ -70,7 +70,7 @@ const Home = ({ page}) => (
                     </div> 
                 </div>
             </div>
-        </div>
+        </div> */}
     </>
 );
 
