@@ -12,7 +12,7 @@ import { getdireccion } from '../helpers/direccion';
 
 
 const MisGrupos = ({ page, page2 }) => {
-    const correo = "";
+    let correo = "";
     let navigate = useNavigate();
     const [data, setData] = useState([]);
     const [message, setMessage] = useState("");

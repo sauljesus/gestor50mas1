@@ -47,6 +47,9 @@ nav{
 	}
 
 }
+.i{
+  z-index: 10;
+}
 
 .nav-btn{
 	position: absolute;

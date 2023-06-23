@@ -24,7 +24,7 @@ function Navbar({visible, show, page}) {
                 <GoThreeBars size={24}  />
                 </button>
             </div>
-            <nav className={!navVisible ? 'navbart' : ''}>
+            <nav className={!navVisible ? 'navbart' : 'i'}>
                 <button
                     type="button"
                     className="nav-btn"
