@@ -10,7 +10,7 @@
     background-color: var(--background-gray);
     margin: 15px;
     display: grid;
-    height: auto;
+    height: max-content !important;
     min-height: calc(100vh - 100px - 30px);
     grid-template-rows: 80px auto;
     row-gap: 2px;

@@ -1,6 +1,7 @@
 .notification {
-  position: flex;
+  position: fixed;
   top: 50px;
+  transform: translate(0, 50%);
   width: 400px;
   z-index: 1;
   background-color: #ffffff;
@@ -9,6 +10,9 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   background-color: purple;
   color: white;
+  left: 50%;
+  margin-left: -200px;
+
 }
 
 .button-alert {

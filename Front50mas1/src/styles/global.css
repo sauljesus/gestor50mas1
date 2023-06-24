@@ -35,6 +35,7 @@
 
 .main-container{
   display: grid;
+  height: max-content !important;
   grid-template-rows: 100px calc(100% - 100px);
 }
 

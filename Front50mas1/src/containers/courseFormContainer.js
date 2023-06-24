@@ -1,13 +1,13 @@
 import React from 'react';
-import CourseForm from '../pages/courseForm';
+import TallerForm from '../pages/tallerForm';
 import { useState } from 'react';
 
 const CourseFormContainer = () =>{
-    const page = "Nuevo Curso";
+    const page = "Ingreso Manual";
 
 
     return(
-        <CourseForm page = { page }/>
+        <TallerForm page = { page }/>
     )
 };
 

@@ -3,7 +3,7 @@ import StudentForm from '../pages/studentForm';
 import { useState } from 'react';
 
 const StudentFormContainer = () =>{
-    const page = "Registrar Estudiante";
+    const page = "Ingreso Manual";
 
 
     return(

@@ -3,7 +3,7 @@ import UserForm from '../pages/userForm';
 import { useState } from 'react';
 
 const UserFormContainer = () =>{
-    const page = "Registrar Usuarios";
+    const page = "Ingreso Manual";
 
 
     return(

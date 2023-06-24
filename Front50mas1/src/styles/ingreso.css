@@ -36,19 +36,3 @@
 .ing-content-form{
     margin-top: 20px;
 }
-
-.notification{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    background-color: #ffffff;
-    border-radius: 50px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    margin-bottom: 20px;
-    background-color: purple;
-    color: white;
-  }

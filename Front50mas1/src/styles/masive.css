@@ -9,7 +9,7 @@
     background-color: var(--background-gray);
     margin: 15px;
     display: grid;
-    height: auto;
+    height: max-content !important;
     min-height: calc(100vh - 100px - 30px);
     grid-template-rows: 80px auto;
     row-gap: 2px;
@@ -123,24 +123,6 @@
     /* cursor: pointer; */
     border: 1px solid var(--background-gray);
 }
-
-.notification{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width:  30vh;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    background-color: #ffffff;
-    border-radius: 50px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    margin-bottom: 20px;
-    background-color: purple;
-    color: white;
-  }
-
 
 
 @media only screen and (max-width: 768px){

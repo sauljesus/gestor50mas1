@@ -18,11 +18,13 @@ import VerificaContainer from '../containers/verificaContainer';
 import StudentFormContainer from '../containers/studentFormContainer';
 import UserFormContainer from '../containers/UserFormContainer';
 import InscripcionesContainer from '../containers/inscripcionesContainer';
+import CourseFormContainer from '../containers/courseFormContainer';
 
 //alumnos
 import StatisticsContaineralum from '../containers/statisticsContaineralum';
 import SingupContaineralum from '../containers/singupContaineralum';
 import StudentGroupsContainer from '../containers/studentGroupsContainer';
+
 
 
 function App() {
@@ -41,17 +43,19 @@ function App() {
           <Route exact path="/masivecharge" element={<MasiveContainer />}/>
           <Route exact path="/login" element={<LoginContainer />}/>
           <Route exact path="/pdf" element={<PDFContainer />}/>
-          <Route exact path="/ingreso" element={<IngresoManualContainer />}/>
+          {/* <Route exact path="/ingreso" element={<IngresoManualContainer />}/> */}
           <Route exact path="/mis-grupos" element={<MisGruposContainer />}/>
           <Route exact path="/grupo" element={<GrupoContainer />}/>
           <Route exact path="/verifica/:folio" element={<VerificaContainer />}/>
           <Route exact path="/newAlumno" element={<StudentFormContainer />}/>
-          <Route exact path="/newUser" element={<UserFormContainer />}/>
+          <Route exact path="/newProfesor" element={<UserFormContainer />}/>
+          <Route exact path="/newTaller" element={<CourseFormContainer />}/>
           <Route exact path="/inscripciones" element={<InscripcionesContainer />}/>
           {/* alumnos */}
           <Route exact path="/alum/home" element={<StatisticsContaineralum />}/>
           <Route exact path="/alum/inscribir" element={<SingupContaineralum />}/>
           <Route exact path="/alum/mis-grupos" element={<StudentGroupsContainer/>}/>
+          <Route path='*' element={<><h3>404 Page not found</h3></>}/>
         </Routes>
       </Router>
   );
