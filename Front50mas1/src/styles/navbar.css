@@ -6,21 +6,7 @@
   display: flex;
 }
 
-.nav-link .icones {
-  background: var(--logo-color-dark);
-  background: linear-gradient(342deg, var(--logo-color-dark) 0%, var(--logo-color-light) 100%);
-  color: white;
-  border-radius: 5px;
-  display: flex;
-  padding: 0;
-  margin: 0;
-  width: 30px;
-  height: 30px;
-  font-size: 1.5em;
-  align-items: center;
-  justify-content: center;
-  margin-right: 3px;
-}
+
 
 nav {
   position: absolute;
@@ -93,13 +79,13 @@ nav {
 
 .nav-link {
   display: flex;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 600;
   min-width: 2px;
   align-items: center;
   color: #222;
   text-decoration: none;
-  padding: 10px 1rem;
+  padding: 5px .5rem;
   border-radius: 5px;
   margin-bottom: 5px;
   border-bottom: 1px solid #ccc;
@@ -186,13 +172,13 @@ nav {
 .nav-link-selected {
   display: flex;
   background-color: #ffffff;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 600;
   min-width: 2px;
   align-items: center;
   color: #222;
   text-decoration: none;
-  padding: 10px 1rem;
+  padding: 5px .5rem;
   border-radius: 5px;
   margin-bottom: 5px;
   border-bottom: 1px solid #ccc;
@@ -212,13 +198,29 @@ nav {
   display: flex;
   padding: 0;
   margin: 0;
-  width: 35px;
-  font-size: 1.5em;
-  height: 35px;
+  width: 30px;
+  font-size: 1.3em;
+  height: 30px;
   align-items: center;
   justify-content: center;
   margin-right: 3px;
   box-shadow: rgb(155, 155, 155) 0px 10px 15px -5px;
+}
+
+.nav-link .icones {
+  background: var(--logo-color-dark);
+  background: linear-gradient(342deg, var(--logo-color-dark) 0%, var(--logo-color-light) 100%);
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  width: 30px !important;
+  height: 30px;
+  font-size: 1.3em;
+  align-items: center;
+  justify-content: center;
+  margin-right: 3px;
 }
 
 .nav-link-selected:hover>.icones {
@@ -249,12 +251,11 @@ nav {
   background: linear-gradient(342deg, var(--logo-color-light) 0%, var(--logo-color-dark) 50%);
   color: white;
   border-radius: 5px;
-  display: flex;
   padding: 0;
   margin: 0;
   width: 30px;
+  font-size: 1.3em;
   height: 30px;
-  font-size: 1.5em;
   align-items: center;
   justify-content: center;
   margin-right: 3px;

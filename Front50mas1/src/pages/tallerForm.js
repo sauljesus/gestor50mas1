@@ -65,7 +65,6 @@ const TallerForm = ({ page }) => {
         'descripcion': `${e.target.elements.txtdescripcionTaller.value}`,
         'periodo': `${e.target.elements.txtperiodoTaller.value}`
       };
-      console.log(taller);
       axios.post(`${getdireccion()}/tallercreate`, taller).then((res) => {
         setMessage(res.data.msg);
         setShowNotification(true);

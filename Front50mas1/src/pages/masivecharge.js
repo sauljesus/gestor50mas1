@@ -40,7 +40,7 @@ const Masive = ({page}) => {
                 setMessage("No tiene premiso para ver esta pagina");
                 setShowNotification(true);
                 setTimeout(() => {
-                    window.location.replace(`/home`);
+                    window.location.replace(`/estadisticas`);
                 }, 3000);
             }else{
                 return;
