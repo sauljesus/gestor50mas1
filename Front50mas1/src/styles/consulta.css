@@ -220,6 +220,13 @@
 
 }
 
+.d-button{
+    right: auto;
+    margin: 10px;
+    overflow: hidden;
+}
+
+
 
 
 @media only screen and (max-width: 768px) {

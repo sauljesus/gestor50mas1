@@ -197,13 +197,15 @@
 
   .excel-uploader {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 5px;
   }
   
   .upload-container {
     width: 300px;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
   }
   
   .dropzone {

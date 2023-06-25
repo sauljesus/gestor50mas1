@@ -6,6 +6,7 @@ import {BsGearFill} from 'react-icons/bs';
 import Navbar from '../components/navbar';
 import Header from '../components/header';
 import DndropImage from '../components/Dnd';
+import DndropImageSingup from '../components/Dndups';
 import IMG from "../images/descarga.png";
 import axios from 'axios';
 import { getdireccion } from '../helpers/direccion';
@@ -105,14 +106,18 @@ const Masive = ({page}) => {
                         <div className="excel-uploader container">
                             <div className="upload-container card">
                                 <div className="card-body">
-                               
                                     <h5 className="card-title">Arrastra o selecciona tu archivo de Excel</h5>
-                                   
                                     <DndropImage  />
                                 </div>
                             </div>
-                           
+                            <div className="upload-container card">
+                                <div className="card-body">
+                                    <h5 className="card-title">Carga de Inscripciones</h5>
+                                    <DndropImageSingup />
+                                </div>
+                            </div>
                         </div>
+                        
                         <div>
                           Sube tu archivo con extensión .xlsx, o puedes descargar el archivo de ejemplo <a href={archivo} download="RegistrosEjemplo.xlsx">aquí.</a>
                         </div>

@@ -1,5 +1,6 @@
 const Alumno = require ('../models/alumnoModel');
 const Course = require ('../models/TalleresModel');
+const Talumno = require ('../models/TalleresalumnosModel');
 const User = require ('../models/usuariosModel');
 const argon2 = require('argon2');
 const express = require('express');
@@ -15,6 +16,7 @@ const fs = require('fs');
 let jsonDatasave;
 let jsonDatasaveu;
 let jsonDatasavecursos;
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -148,9 +150,95 @@ const uploadFile = (req, res) => {
 
 };
 
+const uploadTalleres = (req, res) => {
+  const flags = [];
+  upload.single('file')(req, res, async (err) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+
+    const filePath = req.file.path;
+
+
+      try {
+      const workbook = xlsx.readFile(filePath);
+      const tables= workbook.SheetNames;
+      console.log(tables);
+      const wsiscrp = workbook.Sheets[workbook.SheetNames[0]];
+      const singups = xlsx.utils.sheet_to_json(wsiscrp);
+
+      for (let i = 0; i < singups.length; i++){ 
+        jsonDatasave = singups[i];
+
+        const user = await Alumno.findOne({
+          where: {
+            boleta: jsonDatasave.boleta
+          }
+        });
+        if (!user) {
+          flags.push("El numero de boleta "+ jsonDatasave.boleta +" no existe");
+          //return res.status(200).json({ msg: "El numero de boleta "+ jsonDatasave.boleta +" no existe" });
+        }
+
+        const talleres = await Course.findOne({
+          where: {
+            codigo_taller: jsonDatasave.codigo_taller
+          }
+        });
+        if (!talleres) { 
+          flags.push("El codigo de taller "+ jsonDatasave.codigo_taller +" no existe");
+          //return res.status(424).json({ msg: "El codigo de taller "+ jsonDatasave.codigo_taller +" no existe" }); 
+         }
+
+         const existingAlumno = await Talumno.findOne({
+          where: {
+            boleta: jsonDatasave.boleta,
+            codigo_taller: jsonDatasave.codigo_taller,
+          },
+        });
+      
+        if (existingAlumno) {
+          // Si se encontró un registro existente, lanzar un error
+          flags.push("El alumno con la boleta"+ jsonDatasave.boleta + " ya se encuentra isncrito al taller "+ jsonDatasave.codigo_taller);
+        }else{
+          try{
+            await Talumno.create({
+              boleta: jsonDatasave.boleta,
+              codigo_taller: jsonDatasave.codigo_taller,
+            });
+          } catch (error) {
+            console.error(error);
+            //return res.status(500).json({ error: 'Ocurrio un error al realizar la carga' });
+          }
+        }
+        console.log(flags)
+       }
+
+    // Borrar el archivo después de utilizarlo
+    fs.unlink(req.file.path, (error) => {
+      if (error) {
+        console.error('Error borrando el archivo', error);
+      } else {
+        console.log('File deleted');
+      }
+    });
+      if(flags.length > 0) {
+        return res.status(200).json({ message: flags});
+         }else{
+          return res.status(200).json({ message: 'Carga de Excel completada exitosamente' });
+        }
+        flags.splice(0, flags.length);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Error al realizar las isncripciones compruebe que los datos sean correctos' });
+    }
+  });
+
+};
 
 
 
 module.exports = {
-    uploadFile
+    uploadFile,
+    uploadTalleres
 };

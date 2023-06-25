@@ -13,7 +13,9 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { BiSearchAlt } from 'react-icons/bi';
 import CloseButton from 'react-bootstrap/CloseButton';
+import Button from 'react-bootstrap/Button';
 import { getdireccion } from '../helpers/direccion';
+import * as XLSX from 'xlsx';
 
 
 function Consulta({ page }) {
@@ -115,6 +117,27 @@ function Consulta({ page }) {
       });
   };
 
+  const exportToExcel = (data, filename) => {
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet 1');
+    XLSX.writeFile(workbook, filename + '.xlsx');
+  };
+
+  const handleExportAlumnos = () => {
+    exportToExcel(dataAlumno, 'Alumnos'); // 'datos' será el nombre del archivo Excel
+  };
+
+  const handleExportTalleres = () => {
+    exportToExcel(talleres, 'Talleres'); // 'datos' será el nombre del archivo Excel
+  };
+
+
+  const handleExportProfesores = () => {
+    exportToExcel(profesores, 'Profesores'); // 'datos' será el nombre del archivo Excel
+  };
+
+
   ///////////////////////ALUMNO
   const [sAlumno, setSAlumno] = useState("");
   const [showClear, setShowClear] = useState(false);
@@ -158,6 +181,7 @@ function Consulta({ page }) {
             </DropdownButton>
 
             <div className={showAlumno ? "ing-content-form" : "ing-display-n"}>
+            <Button variant="outline-success" className='d-button' onClick={handleExportAlumnos}>Descarga archivo de Alumnos</Button>
               <div className='c-box-head'>
                 <div className='c-search-box'>
                   <InputGroup className="mb-3 no-float">
@@ -201,6 +225,7 @@ function Consulta({ page }) {
 
 
             <div className={showTaller ? "ing-content-form" : "ing-display-n"}>
+            <Button variant="outline-success" className='d-button' onClick={handleExportTalleres}>Descarga archivo de Talleres</Button>
               <div className='s-box-head'>
                 <div className='s-text-head'>Consulta de Talleres</div>
               </div>
@@ -228,6 +253,7 @@ function Consulta({ page }) {
 
 
             <div className={showProfesor ? "ing-content-form" : "ing-display-n"}>
+            <Button variant="outline-success" className='d-button' onClick={handleExportProfesores}>Descarga archivo de Profesores</Button>
               <div className='s-box-head'>
                 <div className='s-text-head'>Consulta de Profesores</div>
               </div>
