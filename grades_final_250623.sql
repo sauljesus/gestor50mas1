@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `alumno` (
-  `boleta` int(10) NOT NULL,
+  `boleta` int(12) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `apellidoPaterno` varchar(30) NOT NULL,
   `apellidoMaterno` varchar(30) NOT NULL,
@@ -108,7 +108,9 @@ CREATE TABLE `talleres` (
   `correo` varchar(50) DEFAULT NULL,
   `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
-  `periodo` varchar(20) NOT NULL
+  `periodo` varchar(20) NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
