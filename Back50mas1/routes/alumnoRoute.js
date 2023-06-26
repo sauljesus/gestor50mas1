@@ -7,7 +7,7 @@ const {getTest,getAlumnos,getAlumnoByBoleta,updateAlumnoedit,createAlumno, getLo
 
 
  
-router.get('/us',getAlumnosbyDate);
+router.get('/us',getTest);
 router.get('/alumnos', getAlumnos);
 router.post('/alumno', createAlumno);
 router.get('/alumno/:boleta', getAlumnoByBoleta);

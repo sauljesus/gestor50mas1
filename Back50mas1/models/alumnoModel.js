@@ -8,7 +8,7 @@ const Users = db.define('alumno',{
         allowNull: false,
         validate:{
             notEmpty: true,
-            len: [1, 16]
+            len: [1, 12]
         }
     },
     nombre:{

@@ -50,10 +50,10 @@ const uploadFile = (req, res) => {
           for (let i = 0; i < alumnos.length; i++){
             jsonDatasave = alumnos[i];
             const hashedPassword = await bcrypt.hash(jsonDatasave.password, 10);
-            console.log(hashedPassword);
+            let boleta = await generarBoleta();
             try{
               await Alumno.create({
-                  boleta: await generarBoleta(),
+                  boleta: boleta ,
                   nombre: jsonDatasave.nombre,
                   apellidoPaterno: jsonDatasave.apellidoPaterno, 
                   apellidoMaterno: jsonDatasave.apellidoMaterno,
