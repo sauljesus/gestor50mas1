@@ -84,104 +84,136 @@ function ConsultaAlumno({ page }) {
       return true;
     return false;
   }
-    const handleSearch = () => {
-        let filtro1;
-        if (rango1 == "" )
-            filtro1 = [];
-        else{
-            filtro1 = [];
-            document.getElementById("e-rango").classList.add("error-n");
-            alumnos.forEach((alumno, index) => {
-                let code = alumno.boleta;
-                if (parseInt(code) == rango1 ) {
-                    console.log(parseInt(code));
-                    filtro1.push(alumno);
-                }
-            })
-        }     
-        console.log(filtro1);  
-        let res = [];
-        let filtro2;
-        let date1 = document.getElementById("fecha1").value;
-        let date2 = document.getElementById("fecha2").value;
-
-        if (date1 !== "" && date2 !== "") {
-            if (date1 > date2) {
-                document.getElementById("e-fecha").classList.remove("error-n");
-            } else {
-                document.getElementById("e-fecha").classList.add("error-n");
-                filtro2 = filtro1 ? filtro1 : alumnos;
-                filtro2.forEach((alumno, key) => {
-                let creado = alumno.createdAt.substring(0, 10);
-                if (creado >= date1 && creado <= date2) {
-                    res.push(alumno);
-                }
-                })
-            }
-        } else if (date1 !== "") {
-            document.getElementById("e-fecha").classList.add("error-n");
-            filtro2 = filtro1 ? filtro1 : alumnos;
-            filtro2.forEach((alumno, key) => {
-                let creado = alumno.createdAt.substring(0, 10);
-                if (creado >= date1) {
-                    res.push(alumno);
-                }
-            })
-        } else if (date2 !== "") {
-            document.getElementById("e-fecha").classList.add("error-n");
-            filtro2 = filtro1 ? filtro1 : alumnos;
-            filtro2.forEach((alumno, key) => {
-                let creado = alumno.createdAt.substring(0, 10);
-                if (creado <= date2) {
-                    res.push(alumno);
-                }
-            })
+  const handleSearch = () => {
+    let filtro1;
+    if (rango1.length < 12 && rango1 !== "") {
+      document.getElementById("e-rango").classList.remove("error-n");
+    } else if (rango1 !== "") {
+      filtro1 = [];
+      document.getElementById("e-rango").classList.add("error-n");
+      alumnos.forEach((alumno, index) => {
+        let code = alumno.boleta;
+        if (parseInt(code) == rango1) {
+          console.log(parseInt(code));
+          filtro1.push(alumno);
         }
-        if (filtro2) {
+      })
+      setSearchA(filtro1);
+    }
+    let date1 = document.getElementById("fecha1").value;
+    let date2 = document.getElementById("fecha2").value;
+    let res;
+    if (rango1.length < 12) {
+      document.getElementById("e-fecha2").classList.add("error-n");
+      if (date1 !== "" && date2 !== "") {
+        if (date1 > date2) {
+          document.getElementById("e-fecha").classList.remove("error-n");
+        } else {
+          res = [];
+          document.getElementById("e-fecha").classList.add("error-n");
+          let filtro2 = alumnos;
+          filtro2.forEach((alumno, key) => {
+            let fec = alumno.boleta.toString().substring(0, 8);
+            let fech = fec.substring(0, 4) + "-" + fec.substring(4, 6) + "-" + fec.substring(6, 8);
+            if (fech >= date1 && fech <= date2) {
+              res.push(alumno);
+            }
             setSearchA(res);
-            if (res.length === 0) {
-                setSearchA([]);
-                setMessage("Ningún Alumno encontrado");
-                setShowNotification(true);
-                setTimeout(() => {
-                    setShowNotification(false)
-                }, 3000);
-            }
+          })
         }
-        else if (filtro1) {
-        setSearchA(filtro1);
+      } else if (date1 !== "") {
+        res = [];
+        document.getElementById("e-fecha").classList.add("error-n");
+        let filtro2 = alumnos;
+        filtro2.forEach((alumno, key) => {
+          let fec = alumno.boleta.toString().substring(0, 8);
+          let fech = fec.substring(0, 4) + "-" + fec.substring(4, 6) + "-" + fec.substring(6, 8);
+          if (fech >= date1) {
+            res.push(alumno);
+          }
+          setSearchA(res);
+        })
+      } else if (date2 !== "") {
+        res = [];
+        document.getElementById("e-fecha").classList.add("error-n");
+        let filtro2 = alumnos;
+        filtro2.forEach((alumno, key) => {
+          let fec = alumno.boleta.toString().substring(0, 8);
+          let fech = fec.substring(0, 4) + "-" + fec.substring(4, 6) + "-" + fec.substring(6, 8);
+          if (fech <= date2) {
+            res.push(alumno);
+          }
+          setSearchA(res);
+        })
+      }
+    }
+    if (rango1.length === 12 && (date1 !== "" || date2 !== "")) {
+      document.getElementById("e-fecha2").classList.remove("error-n");
+    }
+    if (!filtro1 && !res) {
+      setSearchA([]);
+      setMessage("Ningún filtro realizado");
+      setShowNotification(true);
+      setTimeout(() => {
+        setShowNotification(false)
+      }, 3000);
+    }
+    if (filtro1 || res) {
+      if (filtro1) {
         if (filtro1.length === 0) {
-            setSearchA([]);
-            setMessage("Ningún Alumno encontrado");
-            setShowNotification(true);
-            setTimeout(() => {
+          setSearchA([]);
+          setMessage("Ningún alumno encontrado");
+          setShowNotification(true);
+          setTimeout(() => {
             setShowNotification(false)
-            }, 3000);
+          }, 3000);
         }
-        }
-        else {
-        setSearchA([]);
-        setMessage("Ningún filtro realizado");
-        setShowNotification(true);
-        setTimeout(() => {
+      }
+      if (res) {
+        if (res.length === 0) {
+          setSearchA([]);
+          setMessage("Ningún alumno encontrado");
+          setShowNotification(true);
+          setTimeout(() => {
             setShowNotification(false)
-        }, 3000);
+          }, 3000);
         }
+      }
+    }
+    // if (filtro2) {
+    //   setSearchA(res);
+    //   if (res.length === 0) {
+    //     setSearchA([]);
+    //     setMessage("Ningún Alumno encontrado");
+    //     setShowNotification(true);
+    //     setTimeout(() => {
+    //       setShowNotification(false)
+    //     }, 3000);
+    //   }
+    // }
+    // else if (filtro1) {
+    //   setSearchA(filtro1);
+    //   if (filtro1.length === 0) {
+    //     setSearchA([]);
+    //     setMessage("Ningún Alumno encontrado");
+    //     setShowNotification(true);
+    //     setTimeout(() => {
+    //       setShowNotification(false)
+    //     }, 3000);
+    //   }
+    // }
+    // else {
+    //   setSearchA([]);
+    //   setMessage("Ningún filtro realizado");
+    //   setShowNotification(true);
+    //   setTimeout(() => {
+    //     setShowNotification(false)
+    //   }, 3000);
+    // }
   }
-  
-//   const exportToExcel = (data, filename) => {
-//     const workbook = XLSX.utils.book_new();
-//     const worksheet = XLSX.utils.json_to_sheet(data);
-//     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet 1');
-//     XLSX.writeFile(workbook, filename + '.xlsx');
-//   };
 
-//   const handleExportTalleres = () => {
-//     exportToExcel(talleres, 'Talleres'); // 'datos' será el nombre del archivo Excel
-//   };
+  const vRango1 = (c) => { if ((numeros(c.charAt(c.length - 1)) || c.length == 0) && c.length < 13) setRango1(c); }
 
-const vRango1 = (c) => { if ((numeros(c.charAt(c.length - 1)) || c.length == 0) && c.length < 13) setRango1(c); }
-     
 
 
   return (
@@ -236,6 +268,7 @@ const vRango1 = (c) => { if ((numeros(c.charAt(c.length - 1)) || c.length == 0) 
                     </InputGroup>
                   </div>
                   <h5 className="f-error error-n" id="e-fecha">Rango invalido, filtro ignorado</h5>
+                  <h5 className="f-error error-n" id="e-fecha2">Boleta ingresada, filtro ignorado</h5>
                 </div>
                 <div className='c-form-btn'>
                   <InputGroup.Text onClick={() => handleSearch()} className='c-search-btn-b mb-2'>Buscar <BiSearchAlt /></InputGroup.Text>
@@ -255,7 +288,7 @@ const vRango1 = (c) => { if ((numeros(c.charAt(c.length - 1)) || c.length == 0) 
                       <div className='s-box-nombre'>{alumno.boleta} {alumno.nombre}</div>
                       <div className='s-box-email'>{alumno.correo}</div>
                     </div>
-                    <div className='s-txt-fecha'>{alumno.createdAt}</div> 
+                    <div className='s-txt-fecha'>{alumno.createdAt}</div>
                     <Link to={`/edit/${alumno.boleta}`}>Editar</Link>
                   </div>
 
