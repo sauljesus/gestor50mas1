@@ -85,9 +85,34 @@ const createUserP = async (req, res) => {
   }
 }
 
+const createUserD = async (req, res) => {
+  const { nombre, apellidoPaterno, apellidoMaterno, correo, password, confpassword, tipoUsuario, status } = req.body;
+  if (password !== confpassword) return res.status(400).json({ msg: "Las contraseñas no coinciden" });
+  const hashedPassword = await bcrypt.hash(password, 10);
+  try {
+    await User.create({
+      nombre: nombre,
+      apellidoPaterno: apellidoPaterno,
+      apellidoMaterno: apellidoMaterno,
+      correo: correo,
+      password: hashedPassword,
+      status: 'Activo',
+      tipoUsuario: 'Administrador'
+    });
+    res.status(201).json({ msg: "Registro Exitoso" });
+  } catch (error) {
+    if (error.name.toString().includes("SequelizeUniqueConstraintError")) {
+      res.status(400).json({ msg: "Correo ya registrado" });
+    }
+    else
+      res.status(400).json({ msg: error.message });
+  }
+}
+
 module.exports = {
   getUsers,
   getUserByCorreo,
   updateProfesoredit,
-  createUserP
+  createUserP,
+  createUserD,
 };

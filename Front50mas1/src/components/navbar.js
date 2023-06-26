@@ -107,6 +107,9 @@ function Navbar({ visible, show, page, tipe }) {
             <Link to="/newProfesor" className={"nav-list"}>
               <span>Registrar Profesor</span>
             </Link>
+            <Link to="/newDirector" className={"nav-list"}>
+              <span>Registrar Director</span>
+            </Link>
               </>
             )}
             <Link to="/inscripciones" className={page === "Inscripciones" ? "nav-link-selected" : "nav-link"}>

@@ -22,7 +22,7 @@ import CourseFormContainer from '../containers/courseFormContainer';
 import ConsultaTallerContainer from '../containers/consultaTallerContainer';
 import ConsultaProfesorContainer from '../containers/consultaProfesorContainer';
 import ConsultaAlumnoContainer from '../containers/consultaAlumnoContainer';
-
+import DirectorFormContainer from '../containers/DirectorFormContainer';
 //alumnos
 import StatisticsContaineralum from '../containers/statisticsContaineralum';
 import SingupContaineralum from '../containers/singupContaineralum';
@@ -55,6 +55,7 @@ function App() {
           <Route exact path="/verifica/:folio" element={<VerificaContainer />}/>
           <Route exact path="/newAlumno" element={<StudentFormContainer />}/>
           <Route exact path="/newProfesor" element={<UserFormContainer />}/>
+          <Route exact path="/newDirector" element={<DirectorFormContainer />}/>
           <Route exact path="/newTaller" element={<CourseFormContainer />}/>
           <Route exact path="/inscripciones" element={<InscripcionesContainer />}/>
           {/* alumnos */}
