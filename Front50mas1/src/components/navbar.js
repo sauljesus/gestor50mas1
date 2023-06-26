@@ -76,7 +76,7 @@ function Navbar({ visible, show, page, tipe }) {
             </NavLink>
             {listConsulta && (
               <>
-              <Link to="/consultas" className={"nav-list"}>
+              <Link to="/consulta-alumno" className={"nav-list"}>
               <span>Consultar alumnos</span>
             </Link>
             <Link to="/consulta-taller" className={"nav-list"}>

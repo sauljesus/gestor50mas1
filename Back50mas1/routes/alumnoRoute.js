@@ -3,11 +3,11 @@ const router = express.Router();
 const { check } = require('express-validator'); 
 const { validarCampos } = require('../middlewares/validarcampos');
 const { validartoken } = require('../middlewares/validarJWT');
-const {getTest,getAlumnos,getAlumnoByBoleta,updateAlumnoedit,createAlumno, getLog} = require('../controller/alumnos');
+const {getTest,getAlumnos,getAlumnoByBoleta,updateAlumnoedit,createAlumno, getLog,getAlumnosbyDate} = require('../controller/alumnos');
 
 
  
-router.get('/us',getTest);
+router.get('/us',getAlumnosbyDate);
 router.get('/alumnos', getAlumnos);
 router.post('/alumno', createAlumno);
 router.get('/alumno/:boleta', getAlumnoByBoleta);

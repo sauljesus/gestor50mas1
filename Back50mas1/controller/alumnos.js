@@ -2,6 +2,8 @@ const Alumno = require('../models/alumnoModel');
 const argon2 = require('argon2');
 const bcrypt = require('bcrypt');
 const { generarBoleta } = require('../helpers/generarBoleta');
+const db = require('../config/Database');
+const { QueryTypes, Sequelize } = require('sequelize');
 const getTest = async (req, res) => {
   var boleta = await generarBoleta();
   res.status(200).json({ msg: boleta });
@@ -223,8 +225,6 @@ const deleteAlumno = async (req, res) => {
     res.status(400).json({ msg: error.message });
   }
 }
-
-
 const getLog = async (req, res) => {
 
   const { correo, password } = req.body;
@@ -258,6 +258,26 @@ const getLog = async (req, res) => {
     res.status(400).json({ msg: error.message });
   }
 }
+const getAlumnosbyDate = async(req,res) =>{
+  const {startDate, endDate} = req.body;
+  const Op =Sequelize.Op;
+  var start = new Date(`${startDate} UTC`);
+  var end = new Date(`${endDate} UTC`);
+  console.log(start);
+  console.log(end);
+  try {
+    const response = await Alumno.findAll({
+      where:{
+        createdAt: {
+          [Op.between]: [start, end]
+        }
+      }
+    });
+    res.status(201).json(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 module.exports = {
   getTest,
@@ -270,4 +290,5 @@ module.exports = {
   getAlumnoByBoleta,
   updateAlumnoedit,
   getLog,
+  getAlumnosbyDate
 };
