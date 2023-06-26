@@ -19,6 +19,8 @@ import StudentFormContainer from '../containers/studentFormContainer';
 import UserFormContainer from '../containers/UserFormContainer';
 import InscripcionesContainer from '../containers/inscripcionesContainer';
 import CourseFormContainer from '../containers/courseFormContainer';
+import ConsultaTallerContainer from '../containers/consultaTallerContainer';
+import ConsultaProfesorContainer from '../containers/consultaProfesorContainer';
 
 //alumnos
 import StatisticsContaineralum from '../containers/statisticsContaineralum';
@@ -38,6 +40,8 @@ function App() {
           <Route exact path="/edit-taller/:taller" element={<EditTallerContainer />}/>
           <Route exact path="/edit-profesor/:correo" element={<EditProfesorContainer />}/>
           <Route exact path="/consultas" element={<ConsultasContainer />}/>
+          <Route exact path="/consulta-taller" element={<ConsultaTallerContainer />}/>
+          <Route exact path="/consulta-profesor" element={<ConsultaProfesorContainer />}/>
           <Route exact path="/solicitudes" element={<SolicitudesContainer />}/>
           <Route exact path="/estadisticas" element={<StatisticsContainer />}/>
           <Route exact path="/masivecharge" element={<MasiveContainer />}/>

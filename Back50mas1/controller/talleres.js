@@ -13,7 +13,7 @@ const getTestM = async (req, res) => {
 const getTalleres = async (req, res) => {
   try {
     const response = await Talleres.findAll({
-      attributes: ['codigo_taller', 'nombre', 'descripcion', 'periodo'] //Falta usrpic en db
+      attributes: ['codigo_taller', 'nombre', 'descripcion', 'periodo', 'createdAt'] //Falta usrpic en db
     });
     res.status(200).json(response);
   } catch (error) {

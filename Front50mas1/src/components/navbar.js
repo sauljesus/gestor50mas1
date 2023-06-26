@@ -17,6 +17,7 @@ function Navbar({ visible, show, page, tipe }) {
   const [navVisible, showNavbar] = useState(true);
   const [navAd, setNavAd] = useState(false);
   const [listInsert, setListInsert] = useState(false);
+  const [listConsulta, setListConsulta] = useState(false);
 
   useEffect(() => {
     console.log(tipe)
@@ -31,6 +32,10 @@ function Navbar({ visible, show, page, tipe }) {
   const handleIngresoManual = (e) => {
     setListInsert(!listInsert);
   }
+  const handleConsulta = (e) => {
+    setListConsulta(!listConsulta);
+  }
+
   return (
     <div className="sticky">
       <div className="mobile-nav">
@@ -64,10 +69,24 @@ function Navbar({ visible, show, page, tipe }) {
               <div className='icones shadow-box'> <GoGraph /></div>
               <span>Estadísiticas</span>
             </Link>
-            <Link to="/consultas" className={page === "Consultas" ? "nav-link-selected" : "nav-link"}>
+            <NavLink onClick={() => handleConsulta()} className={page === "Consultas" ? "nav-link-selected" : "nav-link"}>
               <div className='icones shadow-box'> <BiSearchAlt /></div>
               <span>Consultar registros</span>
+              <span className={listConsulta?"":"qr"}><IoMdArrowDropdown /></span>
+            </NavLink>
+            {listConsulta && (
+              <>
+              <Link to="/consultas" className={"nav-list"}>
+              <span>Consultar alumnos</span>
             </Link>
+            <Link to="/consulta-taller" className={"nav-list"}>
+              <span>Consultar talleres</span>
+            </Link>
+            <Link to="/consulta-profesor" className={"nav-list"}>
+              <span>Consultar profesores</span>
+            </Link>
+              </>
+            )}
             <Link to="/masivecharge" className={page === "Cargar Información" ? "nav-link-selected" : "nav-link"}>
               <div className='icones shadow-box'> <SiMicrosoftexcel /></div>
               <span>Cargar información</span>

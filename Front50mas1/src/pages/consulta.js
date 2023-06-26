@@ -181,7 +181,7 @@ function Consulta({ page }) {
             </DropdownButton>
 
             <div className={showAlumno ? "ing-content-form" : "ing-display-n"}>
-            <Button variant="outline-success" className='d-button' onClick={handleExportAlumnos}>Descarga archivo de Alumnos</Button>
+              <Button variant="outline-success" className='d-button' onClick={handleExportAlumnos}>Descarga archivo de Alumnos</Button>
               <div className='c-box-head'>
                 <div className='c-search-box'>
                   <InputGroup className="mb-3 no-float">
@@ -190,7 +190,7 @@ function Consulta({ page }) {
                       onChange={(e) => handleSearchAlumno(e)}
                       value={sAlumno}
                     />
-                    <InputGroup.Text className={showClear ? 'c-search-btn' : 'qr'} onClick={() => clearSearch()}><CloseButton /></InputGroup.Text>
+                    <InputGroup.Text className={showClear ? 'c-search-btn' : 'qr'} onClick={() => clearSearch()}><CloseButton className='c-btn-i'/></InputGroup.Text>
                     <InputGroup.Text className='c-search-btn' onClick={() => searchAlumno()}><BiSearchAlt /></InputGroup.Text>
                   </InputGroup>
                   <div className='c-text-head'>Consulta de Alumnos</div>
@@ -225,7 +225,7 @@ function Consulta({ page }) {
 
 
             <div className={showTaller ? "ing-content-form" : "ing-display-n"}>
-            <Button variant="outline-success" className='d-button' onClick={handleExportTalleres}>Descarga archivo de Talleres</Button>
+              <Button variant="outline-success" className='d-button' onClick={handleExportTalleres}>Descarga archivo de Talleres</Button>
               <div className='s-box-head'>
                 <div className='s-text-head'>Consulta de Talleres</div>
               </div>
@@ -253,7 +253,7 @@ function Consulta({ page }) {
 
 
             <div className={showProfesor ? "ing-content-form" : "ing-display-n"}>
-            <Button variant="outline-success" className='d-button' onClick={handleExportProfesores}>Descarga archivo de Profesores</Button>
+              <Button variant="outline-success" className='d-button' onClick={handleExportProfesores}>Descarga archivo de Profesores</Button>
               <div className='s-box-head'>
                 <div className='s-text-head'>Consulta de Profesores</div>
               </div>

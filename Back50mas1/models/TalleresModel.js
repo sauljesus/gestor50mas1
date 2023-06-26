@@ -43,7 +43,7 @@ const Talleres = db.define('talleres',{
         }
     }
 },{
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true 
 });
 
