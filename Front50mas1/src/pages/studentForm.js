@@ -156,7 +156,8 @@ const StudentForm = ({ visible, show, page }) => {
   }
 
   const [estadotype, setestadotype] = useState(['Soltero', 'Casado', 'Divorciado', 'Viudo', 'Union_Libre']);
-  const [niveltype, setestadoniveltype] = useState(['Ninguno','Primaria', 'Secundaria', 'Bachillerato', 'Preparatoria', 'Licenciatura', 'Ingeniería', 'Doctorado', 'Maestría', 'Otro']);
+  const [niveltype, setestadoniveltype] = useState(['Ninguno', 'Primaria', 'Secundaria', 'Bachillerato', 'Preparatoria', 'Licenciatura', 'Ingeniería', 'Doctorado', 'Maestría', 'Otro']);
+  const [nivelAtype, setestadonivelAtype] = useState([]);
   const Estado = estadotype.map((Estado) => Estado);
   const estadoCivilChange = (e) => {
     console.log(estadotype[e.target.value]);
@@ -361,6 +362,16 @@ const StudentForm = ({ visible, show, page }) => {
   const validaRegistro = (v) => { if (letrasSAYN(v.charAt(v.length - 1)) || v.length == 0) setRegistroMedico(v); }
   const vRegistro = () => { if (registroMedico.length >= 3) document.getElementById("e-registro").classList.add('error-n'); else { document.getElementById("e-registro").classList.remove('error-n'); } }
 
+  const nivelAonchange = () => {
+    let val = document.getElementById("selector-hijos").value;
+    if (val === "Si") {
+      setestadonivelAtype(['Ninguno','Preescolar', 'Primaria', 'Secundaria', 'Bachillerato', 'Preparatoria', 'Licenciatura', 'Ingeniería', 'Doctorado', 'Maestría', 'Otro'])
+    } else if (val === "No") {
+      setestadonivelAtype(['N/A']);
+    } else {
+      setestadonivelAtype([]);
+    }
+  }
 
   return (
     <>
@@ -472,14 +483,14 @@ const StudentForm = ({ visible, show, page }) => {
                     </select>
 
                     <h1 className='f-log-semititu'>Hijos</h1>
-                    <select className='f-log-input-r' name="dpdHijos" onChange={hijosChange} >
+                    <select className='f-log-input-r' name="dpdHijos" id="selector-hijos" onChange={() => nivelAonchange()} >
+                      <option value={""}></option>
                       {Hijo.map((hi, key) => (<option key={key} value={hi}>{hi}</option>))}
                     </select>
 
                     <h1 className='f-log-semititu'>Nivel Académico Hijos</h1>
                     <select required maxLength={30} className='f-log-input-r' name="txtNivelAHijos" placeholder="Nivel Académico Hijos">
-                      <option value={"Preescolar"}>Preescolar</option>
-                      {niveltype.map((niveles, key) => (<option key={key} value={niveles}>{niveles}</option>))}
+                      {nivelAtype.map((niveles, key) => (<option key={key} value={niveles}>{niveles}</option>))}
                     </select>
 
                     <h1 className='f-log-semititu'>Trabaja</h1>

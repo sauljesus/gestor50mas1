@@ -48,9 +48,8 @@ const Statisticsalum = ({ page}) => {
             }
             try {
                 const  {data}  = await axios.get(`${getdireccion()}/checkJwt`,{headers:{'Authorization':localStorage.getItem('jwt')}});
-                console.log(data);
                 setBoleta(data.boleta);
-                fetchData();
+                fetchData(data.boleta);
             }catch(err){
                 setMessage("Por favor inicia sesión");
                 setShowNotification(true);
@@ -201,9 +200,8 @@ const Statisticsalum = ({ page}) => {
             }
         }
     };
-    const fetchData = () => {
-
-        axios.get(`http://localhost:5000/estadistica6/`+boleta)
+    const fetchData = (bol) => {
+        axios.get(`${getdireccion()}/estadistica6/`+bol)
             .then(response => {
                 let data = response.data;
                 let cantPromedio = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -217,7 +215,7 @@ const Statisticsalum = ({ page}) => {
             }
             );
 
-            axios.get(`http://localhost:5000/estadistica7/`+boleta)
+            axios.get(`${getdireccion()}/estadistica7/`+bol)
             .then(response => {
                 let data = response.data;
                 let promediod =data[0].promedio_calificaciones;
