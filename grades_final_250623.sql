@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `alumno` (
-  `boleta` int(12) NOT NULL,
+  `boleta` bigint(12) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `apellidoPaterno` varchar(30) NOT NULL,
   `apellidoMaterno` varchar(30) NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE `certificado` (
 --
 
 CREATE TABLE `ceusuario` (
-  `boleta` int(10) NOT NULL,
+  `boleta` bigint(12) NOT NULL,
   `fechaIngreso` datetime NOT NULL,
   `fechaTermino` datetime NOT NULL,
   `estadoPermanencia` enum('Baja','Inscrito','Termino') NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE `talleres` (
 --
 
 CREATE TABLE `talleres_alumno` (
-  `boleta` int(10) NOT NULL,
+  `boleta` bigint(12) NOT NULL,
   `codigo_taller` varchar(11) NOT NULL,
   `calificacion` int(3) DEFAULT NULL,
   `estado` enum('Aprobada','Reprobada') DEFAULT NULL,
