@@ -156,7 +156,7 @@ const StudentForm = ({ visible, show, page }) => {
   }
 
   const [estadotype, setestadotype] = useState(['Soltero', 'Casado', 'Divorciado', 'Viudo', 'Union_Libre']);
-  const [niveltype, setestadoniveltype] = useState(['Primaria', 'Secundaria', 'Bachillerato', 'Preparatoria', 'Licenciatura', 'Ingeniería', 'Doctorado', 'Maestría', 'Otro']);
+  const [niveltype, setestadoniveltype] = useState(['Ninguno','Primaria', 'Secundaria', 'Bachillerato', 'Preparatoria', 'Licenciatura', 'Ingeniería', 'Doctorado', 'Maestría', 'Otro']);
   const Estado = estadotype.map((Estado) => Estado);
   const estadoCivilChange = (e) => {
     console.log(estadotype[e.target.value]);
